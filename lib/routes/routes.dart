@@ -1,0 +1,14 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:food_forward/pages/food/food_,menu_view.dart';
+
+/// Need to run the following command
+///    flutter packages pub run build_runner watch --delete-conflicting-outputs
+
+@MaterialAutoRouter(
+  replaceInRouteName: 'View,Route',
+  routes: [
+    MaterialRoute(page: MenuView, initial: true),
+    // MaterialRoute(page: SideNavigationView, path: '/navigation'),
+  ],
+)
+class $AppRouter {}
