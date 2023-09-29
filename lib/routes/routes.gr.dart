@@ -11,37 +11,48 @@
 // ignore_for_file: type=lint
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i2;
-import 'package:flutter/material.dart' as _i3;
+import 'package:auto_route/auto_route.dart' as _i3;
+import 'package:flutter/material.dart' as _i4;
 
-import '../pages/food/food_,menu_view.dart' as _i1;
+import '../pages/menu/welcome_view.dart' as _i1;
+import '../pages/profile/profile_view.dart' as _i2;
 
-class AppRouter extends _i2.RootStackRouter {
-  AppRouter([_i3.GlobalKey<_i3.NavigatorState>? navigatorKey])
+class AppRouter extends _i3.RootStackRouter {
+  AppRouter([_i4.GlobalKey<_i4.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
-  final Map<String, _i2.PageFactory> pagesMap = {
+  final Map<String, _i3.PageFactory> pagesMap = {
     MenuRoute.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
+      return _i3.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i1.MenuView(),
       );
-    }
+    },
+    ProfileRoute.name: (routeData) {
+      return _i3.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i2.ProfileView(),
+      );
+    },
   };
 
   @override
-  List<_i2.RouteConfig> get routes => [
-        _i2.RouteConfig(
+  List<_i3.RouteConfig> get routes => [
+        _i3.RouteConfig(
           MenuRoute.name,
           path: '/',
-        )
+        ),
+        _i3.RouteConfig(
+          ProfileRoute.name,
+          path: '/profile',
+        ),
       ];
 }
 
 /// generated route for
 /// [_i1.MenuView]
-class MenuRoute extends _i2.PageRouteInfo<void> {
+class MenuRoute extends _i3.PageRouteInfo<void> {
   const MenuRoute()
       : super(
           MenuRoute.name,
@@ -49,4 +60,16 @@ class MenuRoute extends _i2.PageRouteInfo<void> {
         );
 
   static const String name = 'MenuRoute';
+}
+
+/// generated route for
+/// [_i2.ProfileView]
+class ProfileRoute extends _i3.PageRouteInfo<void> {
+  const ProfileRoute()
+      : super(
+          ProfileRoute.name,
+          path: '/profile',
+        );
+
+  static const String name = 'ProfileRoute';
 }
