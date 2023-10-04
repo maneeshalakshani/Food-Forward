@@ -45,11 +45,13 @@ class _MenuViewState extends State<MenuView> {
               children: [
                 ClickableContainer(
                   text: "Donor", 
+                  imgUrl: "assets/avatar.png",
                   width: 150,
                   route: ProfileRoute(),
                 ),
                 ClickableContainer(
                   text: "Donor", 
+                  imgUrl: "assets/avatar.png",
                   width: 150,
                   route: ProfileRoute(),
                 ),
@@ -57,6 +59,7 @@ class _MenuViewState extends State<MenuView> {
             ),
             const ClickableContainer(
               text: "Donor", 
+              imgUrl: "assets/avatar.png",
               width: 310,
               route: ProfileRoute(),
             ),
