@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:food_forward/const.dart';
+import 'package:food_forward/pages/Components/appbar.dart';
 import 'package:food_forward/pages/Components/clickable_container.dart';
 import 'package:food_forward/routes/routes.gr.dart';
 
@@ -15,7 +16,7 @@ class ProfileView extends HookWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(),
+      appBar: appBar(),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -57,7 +58,7 @@ class ProfileView extends HookWidget {
               child: Column(
                 children: [
                   ClickableContainer(
-                    route: ProfileRoute(), 
+                    route: const MyProfileRoute(), 
                     text: "View Profile",
                     width: width/10*9,
                     bgColor: LIGHT_PINK,
@@ -65,7 +66,7 @@ class ProfileView extends HookWidget {
                     height: 50,
                   ),
                   ClickableContainer(
-                    route: ProfileRoute(), 
+                    route: const MyStatsRoute(), 
                     text: "Good Morning!",
                     width: width/10*9,
                     bgColor: DARK_PINK,
