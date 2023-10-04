@@ -66,7 +66,6 @@ class ProfileView extends HookWidget {
                     height: 50,
                   ),
                   ClickableContainer(
-                    route: const MyStatsRoute(), 
                     text: "Good Morning!",
                     width: width/10*9,
                     bgColor: DARK_PINK,

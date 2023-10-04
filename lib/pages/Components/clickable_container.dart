@@ -11,7 +11,7 @@ class ClickableContainer extends HookWidget {
     this.height,
     this.width,
     this.imgUrl,
-    required this.route,
+    this.route,
     required this.text
   }) : super(key: key);
 
@@ -27,7 +27,9 @@ class ClickableContainer extends HookWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        context.router.push(route);
+        route != null 
+          ? context.router.push(route)
+          : null ;
       },
       child: Card(
         color: bgColor ?? BLACK,
