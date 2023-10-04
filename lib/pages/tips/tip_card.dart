@@ -1,15 +1,19 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:food_forward/const.dart';
+import 'package:food_forward/routes/routes.gr.dart';
 
 class TipCard extends HookWidget {
   const TipCard({
     Key? key, 
     required this.imageURL,
-    required this.text,
+    required this.tipLabel,
+    required this.tipID,
   }) : super(key: key);
   final String imageURL;
-  final String text;
+  final String tipLabel;
+  final int tipID;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +37,7 @@ class TipCard extends HookWidget {
               ),
               Container(
                 width: width/3 * 1.9,
-                child: Text(text)
+                child: Text(tipLabel)
               ),
             ],
           ),
@@ -41,7 +45,9 @@ class TipCard extends HookWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               ElevatedButton(
-                onPressed: (){}, 
+                onPressed: (){
+                  context.router.push(ExpandedTipRoute(tipID: tipID));
+                }, 
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(DARK_PINK),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(

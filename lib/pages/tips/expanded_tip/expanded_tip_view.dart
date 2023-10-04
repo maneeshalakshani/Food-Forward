@@ -3,13 +3,15 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:food_forward/const.dart';
 import 'package:food_forward/pages/Components/appbar.dart';
 import 'package:food_forward/pages/Components/clickable_container.dart';
-import 'package:food_forward/pages/tips/tip_card.dart';
+import 'package:food_forward/pages/tips/expanded_tip/tip_detailed_card.dart';
 import 'package:food_forward/pages/tips/tips_list.dart';
 
-class TipsView extends HookWidget {
-  const TipsView({
+class ExpandedTipView extends HookWidget {
+  const ExpandedTipView({
     Key? key, 
+    required this.tipID,
   }) : super(key: key);
+  final int tipID;
 
 
   @override
@@ -25,20 +27,31 @@ class TipsView extends HookWidget {
           child: Column(
             children: [
               ClickableContainer(
-                text: "discover helpful tips".toUpperCase(),
+                text: tipsList[tipID].tipTitle,
                 bgColor: DARK_PINK,
                 width: width,
                 textColor: BLACK,
               ),
+              Container(
+                width: width,
+                padding: const EdgeInsets.symmetric(vertical: 30),
+                child: Text(
+                  tipsList[tipID].text,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: Colors.red,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
               SizedBox(
                 height: height/10 * 7.1,
                 child: ListView.separated(
-                  itemCount: tipsList.length,
+                  itemCount: 5,
                   itemBuilder: (context, i){
-                    return TipCard(
-                      imageURL: LOGO_URL, 
-                      tipLabel: tipsList[i].tipTitle,
-                      tipID: i,
+                    return TipDetailedCard(
+                      tipNumber: i, 
+                      text: "sdge awjf wyfw fkwyf wfyakf aegfaieg aegbiaeugiuaerg aeiugaieug aeguaeilughaer gaeurghea",
                     );
                   }, 
                   separatorBuilder: (context, i) => const SizedBox(height: 20,)),
