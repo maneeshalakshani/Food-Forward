@@ -33,9 +33,10 @@ class ClickableContainer extends HookWidget {
       },
       child: Card(
         color: bgColor ?? BLACK,
-        child: SizedBox(
+        child: Container(
           height: height ?? 100,
           width: width ?? 100,
+          padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -43,6 +44,7 @@ class ClickableContainer extends HookWidget {
                 imgUrl != null ? Image.asset(imgUrl!, height: 40,) : const SizedBox(),
                 Text(
                   text,
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 18.0,
                     letterSpacing: 1.0,
