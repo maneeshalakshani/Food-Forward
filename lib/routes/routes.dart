@@ -6,6 +6,8 @@ import 'package:food_forward/pages/stats/my_stats_view.dart';
 import 'package:food_forward/pages/stats/specified_stat_view/specified_stat_view.dart';
 import 'package:food_forward/pages/tips/expanded_tip/expanded_tip_view.dart';
 import 'package:food_forward/pages/tips/tips_view.dart';
+import 'package:food_forward/pages/volunteer/authentication/login/volunteer_login_view.dart';
+import 'package:food_forward/pages/volunteer/authentication/signup/volunteer_signup_view.dart';
 
 /// Need to run the following command
 ///    flutter packages pub run build_runner watch --delete-conflicting-outputs
@@ -20,6 +22,8 @@ import 'package:food_forward/pages/tips/tips_view.dart';
     MaterialRoute(page: TipsView, path: '/tips'),
     MaterialRoute(page: ExpandedTipView, path: '/expandedTips'),
     MaterialRoute(page: SpecifiedStatView, path: '/specifiedStat'),
+    MaterialRoute(page: VolunteerLoginView),
+    MaterialRoute(page: VolunteerSignUpView),
   ],
 )
 class $AppRouter {}

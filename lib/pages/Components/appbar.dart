@@ -8,6 +8,6 @@ PreferredSizeWidget appBar({
     title: Text(
       title ?? APP_NAME,
     ),
-    backgroundColor: DARK_PINK,
+    backgroundColor: BLACK,
   );
 }
