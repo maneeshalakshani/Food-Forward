@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:food_forward/const.dart';
 import 'package:food_forward/pages/Components/appbar.dart';
+import 'package:food_forward/pages/Components/sideNav.dart';
 import 'package:food_forward/pages/profile/horizontal_scroll_card.dart';
 import 'package:food_forward/pages/profile/share_card.dart';
 import 'package:food_forward/pages/profile/srollIems.dart';
@@ -18,6 +19,7 @@ class MyProfileView extends HookWidget {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: appBar(),
+      drawer: SideNav(),
       body: SingleChildScrollView(
         child: Column(
           children: [
