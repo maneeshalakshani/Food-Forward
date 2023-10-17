@@ -63,6 +63,12 @@ class _MenuViewState extends State<MenuView> {
               width: 310,
               route: VolunteerLoginRoute(userType: 'volunteer'),
             ),
+            ClickableContainer(
+              text: "Donor Community", 
+              imgUrl: "assets/avatar.png",
+              width: 310,
+              route: VolunteerLoginRoute(userType: 'donor'),
+            ),
           ],
         )
       ),

@@ -71,7 +71,9 @@ class VolunteerLoginView extends HookWidget {
                   onPressed: () {
                     userType == 'volunteer'
                       ? context.router.push(const VolunteerProfileRoute())
-                      : context.router.push(const ExplorerRoute());
+                      : userType == 'donor'
+                        ? context.router.push(const DonorFoodListRoute())
+                        : context.router.push(const ExplorerRoute());
                   },
                 ),
                 AuthenticateNavigator(
