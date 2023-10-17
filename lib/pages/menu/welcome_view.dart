@@ -58,10 +58,10 @@ class _MenuViewState extends State<MenuView> {
               ],
             ),
             const ClickableContainer(
-              text: "Donor", 
+              text: "Volunteer Community", 
               imgUrl: "assets/avatar.png",
               width: 310,
-              route: ProfileRoute(),
+              route: VolunteerLoginRoute(),
             ),
           ],
         )

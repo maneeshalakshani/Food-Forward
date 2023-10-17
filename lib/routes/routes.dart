@@ -3,6 +3,15 @@ import 'package:food_forward/pages/menu/welcome_view.dart';
 import 'package:food_forward/pages/profile/my_profile_view.dart';
 import 'package:food_forward/pages/profile/profile_view.dart';
 import 'package:food_forward/pages/stats/my_stats_view.dart';
+import 'package:food_forward/pages/stats/specified_stat_view/specified_stat_view.dart';
+import 'package:food_forward/pages/tips/expanded_tip/expanded_tip_view.dart';
+import 'package:food_forward/pages/tips/tips_view.dart';
+import 'package:food_forward/pages/volunteer/authentication/login/volunteer_login_view.dart';
+import 'package:food_forward/pages/volunteer/authentication/signup/volunteer_signup_view.dart';
+import 'package:food_forward/pages/volunteer/my_profile/my_profile.dart';
+import 'package:food_forward/pages/volunteer/my_tasks/complete_task/complete_task_view.dart';
+import 'package:food_forward/pages/volunteer/my_tasks/my_tasks_view.dart';
+import 'package:food_forward/pages/volunteer/notifications/my_notifications_view.dart';
 
 /// Need to run the following command
 ///    flutter packages pub run build_runner watch --delete-conflicting-outputs
@@ -14,6 +23,15 @@ import 'package:food_forward/pages/stats/my_stats_view.dart';
     MaterialRoute(page: ProfileView, path: '/profile'),
     MaterialRoute(page: MyProfileView, path: '/myProfile'),
     MaterialRoute(page: MyStatsView, path: '/stats'),
+    MaterialRoute(page: TipsView, path: '/tips'),
+    MaterialRoute(page: ExpandedTipView, path: '/expandedTips'),
+    MaterialRoute(page: SpecifiedStatView, path: '/specifiedStat'),
+    MaterialRoute(page: VolunteerLoginView),
+    MaterialRoute(page: VolunteerSignUpView),
+    MaterialRoute(page: VolunteerProfileView),
+    MaterialRoute(page: VolunteerNotificationsView),
+    MaterialRoute(page: VolunteerTaskView),
+    MaterialRoute(page: VolunteerCompleteTaskView),
   ],
 )
 class $AppRouter {}

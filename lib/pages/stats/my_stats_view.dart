@@ -3,6 +3,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:food_forward/const.dart';
 import 'package:food_forward/pages/Components/appbar.dart';
 import 'package:food_forward/pages/Components/clickable_container.dart';
+import 'package:food_forward/pages/stats/specified_stat_view/pieChartData.dart';
+import 'package:food_forward/routes/routes.gr.dart';
 
 class MyStatsView extends HookWidget {
   const MyStatsView({
@@ -46,18 +48,36 @@ class MyStatsView extends HookWidget {
                 width: width,
                 bgColor: LIGHT_PINK,
                 textColor: BLACK,
+                route: SpecifiedStatRoute(
+                  title: "Total Donations",
+                  dataList: totalDonationlistData,
+                  heroWord: "You're a true warrior!",
+                  heroWordColor: Colors.pink,
+                ),
               ),
               ClickableContainer(
                 text: "Community Contributions",
                 width: width,
                 bgColor: LIGHT_PINK,
                 textColor: BLACK,
+                route: SpecifiedStatRoute(
+                  title: "Community Contributions",
+                  dataList: communitylistData,
+                  heroWord: "You're a community hero!",
+                  heroWordColor: const Color.fromARGB(255, 45, 120, 154),
+                ),
               ),
               ClickableContainer(
                 text: "Environmental Impact",
                 width: width,
                 bgColor: LIGHT_PINK,
                 textColor: BLACK,
+                route: SpecifiedStatRoute(
+                  title: "Environmental Impact",
+                  dataList: tEnvironmentlistData,
+                  heroWord: "You're a green guardian!",
+                  heroWordColor: const Color.fromARGB(255, 52, 149, 102),
+                ),
               ),
             ],
           ),
