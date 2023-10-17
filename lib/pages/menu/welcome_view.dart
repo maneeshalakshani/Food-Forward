@@ -40,28 +40,28 @@ class _MenuViewState extends State<MenuView> {
                 ),
               ),
             ),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ClickableContainer(
+                const ClickableContainer(
                   text: "Donor", 
                   imgUrl: "assets/avatar.png",
                   width: 150,
                   route: ProfileRoute(),
                 ),
                 ClickableContainer(
-                  text: "Donor", 
+                  text: "Recipient", 
                   imgUrl: "assets/avatar.png",
                   width: 150,
-                  route: ProfileRoute(),
+                  route: VolunteerLoginRoute(userType: 'recipient'),
                 ),
               ],
             ),
-            const ClickableContainer(
+            ClickableContainer(
               text: "Volunteer Community", 
               imgUrl: "assets/avatar.png",
               width: 310,
-              route: VolunteerLoginRoute(),
+              route: VolunteerLoginRoute(userType: 'volunteer'),
             ),
           ],
         )

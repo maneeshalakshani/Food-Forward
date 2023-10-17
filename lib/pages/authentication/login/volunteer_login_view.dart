@@ -10,7 +10,9 @@ import 'package:food_forward/routes/routes.gr.dart';
 class VolunteerLoginView extends HookWidget {
   const VolunteerLoginView({
     Key? key, 
+    required this.userType,
   }) : super(key: key);
+  final String userType;
 
   @override
   Widget build(BuildContext context) {
@@ -66,12 +68,16 @@ class VolunteerLoginView extends HookWidget {
                 ),
                 SquareButton(
                   text: "login".toUpperCase(),
-                  onPressed: () => context.router.push(const VolunteerProfileRoute()),
+                  onPressed: () {
+                    userType == 'volunteer'
+                      ? context.router.push(const VolunteerProfileRoute())
+                      : context.router.push(const ExplorerRoute());
+                  },
                 ),
-                const AuthenticateNavigator(
+                AuthenticateNavigator(
                   text: "Don't have an account?", 
                   linkText: "Sign Up",
-                  route: VolunteerSignUpRoute(),
+                  route: VolunteerSignUpRoute(userType: userType),
                 ),
               ],
             ),
