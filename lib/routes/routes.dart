@@ -1,4 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:food_forward/pages/donor/add_food/add_food_view.dart';
+import 'package:food_forward/pages/donor/food_items/food_items_view.dart';
+import 'package:food_forward/pages/donor/update_food/update_food_view.dart';
 import 'package:food_forward/pages/menu/welcome_view.dart';
 import 'package:food_forward/pages/profile/my_profile_view.dart';
 import 'package:food_forward/pages/profile/profile_view.dart';
@@ -38,6 +41,9 @@ import 'package:food_forward/pages/volunteer/notifications/my_notifications_view
     MaterialRoute(page: ExplorerView),
     MaterialRoute(page: CartView),
     MaterialRoute(page: OrderConfirmView),
+    MaterialRoute(page: DonorFoodListView),
+    MaterialRoute(page: DonorAddFoodView),
+    MaterialRoute(page: DonorUpdateFoodView),
   ],
 )
 class $AppRouter {}
