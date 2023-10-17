@@ -13,21 +13,17 @@ class VolunteerSignUpView extends HookWidget {
   }) : super(key: key);
   final String userType;
 
-  // Create a state variable for delivery preference
   final ValueNotifier<String> deliveryPreference = ValueNotifier<String>('veg');
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
 
-    // Create a function to handle the sign-up button click
     void handleSignUpClick() {
       // Get the selected delivery preference
       String selectedPreference = deliveryPreference.value;
 
-      // You can use 'selectedPreference' in your sign-up process
       print('Selected Delivery Preference: $selectedPreference');
-      // Add your sign-up logic here
     }
 
     return Scaffold(
@@ -45,7 +41,7 @@ class VolunteerSignUpView extends HookWidget {
             child: Column(
               children: [
                 const Text(
-                  "Volunteer Registration",
+                  "Registration",
                   style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,

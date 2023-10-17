@@ -35,7 +35,7 @@ class VolunteerLoginView extends HookWidget {
             child: Column(
               children: [
                 const Text(
-                  "Volunteer Login",
+                  "Login",
                   style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
