@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:food_forward/pages/Components/appbar.dart';
@@ -65,6 +66,7 @@ class VolunteerLoginView extends HookWidget {
                 ),
                 SquareButton(
                   text: "login".toUpperCase(),
+                  onPressed: () => context.router.push(const VolunteerProfileRoute()),
                 ),
                 const AuthenticateNavigator(
                   text: "Don't have an account?", 
