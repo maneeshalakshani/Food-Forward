@@ -20,9 +20,20 @@ class DonorFunction {
       required String expiryDate,
       required String foodPreference,
       required String imageUrl,
+      required int environmentalImpact,
+      required String userId,
       required route,
       required BuildContext context}) async {
-    Food food = Food(name: name, price: price, quantity: quantity, expiryDate: expiryDate, foodPreference: foodPreference, imageUrl: imageUrl);
+    Food food = Food(
+      name: name, 
+      price: price, 
+      quantity: quantity, 
+      expiryDate: expiryDate, 
+      foodPreference: foodPreference, 
+      imageUrl: imageUrl, 
+      environmentalImpact: environmentalImpact,
+      userId: userId,
+    );
     try {
       FirebaseFirestore.instance
           .runTransaction((Transaction transaction) async {
@@ -48,6 +59,8 @@ class DonorFunction {
     required String foodPreference,
     required String imageUrl,
     required BuildContext context,
+    required int environmentalImpact,
+    required String userId,
     required route,
   }) {
     try {
@@ -59,6 +72,8 @@ class DonorFunction {
           'expiryDate': expiryDate,
           'foodPreference': foodPreference,
           'imageUrl': imageUrl,
+          'environmentalImpact': environmentalImpact,
+          'userId': userId,
         });
       })
       .then((value) => context.router.push(route));

@@ -23,6 +23,7 @@ class _DonorUpdateFoodViewState extends State<DonorUpdateFoodView> {
   final TextEditingController expiryController = TextEditingController();
   final TextEditingController quantityController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
+  final TextEditingController envImpactController = TextEditingController();
   var selectedPreference; 
 
   @override
@@ -33,6 +34,7 @@ class _DonorUpdateFoodViewState extends State<DonorUpdateFoodView> {
     quantityController.text = widget.food.quantity;
     priceController.text = widget.food.price;
     selectedPreference = widget.food.foodPreference;
+    envImpactController.text = widget.food.environmentalImpact.toString();
   }
 
   @override
@@ -44,7 +46,8 @@ class _DonorUpdateFoodViewState extends State<DonorUpdateFoodView> {
       foodNameController: foodNameController, 
       priceController: priceController, 
       quantityController: quantityController, 
-      selectedPreference: selectedPreference
+      selectedPreference: selectedPreference,
+      envImpactController: envImpactController,
     );
   }
 }
@@ -59,12 +62,14 @@ class DonorUpdateFood extends HookWidget {
     required this.priceController,
     required this.quantityController,
     required this.selectedPreference,
+    required this.envImpactController,
   }) : super(key: key);
   final Food food;
   final TextEditingController foodNameController;
   final TextEditingController expiryController;
   final TextEditingController quantityController;
   final TextEditingController priceController;
+  final TextEditingController envImpactController;
   var selectedPreference; 
 
   @override
@@ -111,6 +116,11 @@ class DonorUpdateFood extends HookWidget {
                 showTopLabel: true,
                 controller: expiryController,
               ),
+              CustomeTextField(
+                label: "Environmental Impact",
+                showTopLabel: true,
+                controller: envImpactController,
+              ),
               FoodPreferenceSelection(
                 onChanged: (value) {
                   selectedPreference = value;
@@ -127,7 +137,9 @@ class DonorUpdateFood extends HookWidget {
                     expiryDate: expiryController.text, 
                     foodPreference: selectedPreference, 
                     imageUrl: food.imageUrl,
+                    environmentalImpact: int.parse(envImpactController.text),
                     context: context,
+                    userId: food.userId,
                     route: const DonorFoodListRoute()
                   );
                     // context.router.push(const DonorFoodListRoute());

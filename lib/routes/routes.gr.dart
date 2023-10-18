@@ -95,7 +95,9 @@ class AppRouter extends _i21.RootStackRouter {
           title: args.title,
           dataList: args.dataList,
           heroWord: args.heroWord,
+          text: args.text,
           heroWordColor: args.heroWordColor,
+          percentage: args.percentage,
         ),
       );
     },
@@ -385,7 +387,9 @@ class SpecifiedStatRoute extends _i21.PageRouteInfo<SpecifiedStatRouteArgs> {
     required String title,
     required List<_i23.PieChartListData> dataList,
     required String heroWord,
+    required String text,
     _i22.Color? heroWordColor,
+    required double percentage,
   }) : super(
           SpecifiedStatRoute.name,
           path: '/specifiedStat',
@@ -394,7 +398,9 @@ class SpecifiedStatRoute extends _i21.PageRouteInfo<SpecifiedStatRouteArgs> {
             title: title,
             dataList: dataList,
             heroWord: heroWord,
+            text: text,
             heroWordColor: heroWordColor,
+            percentage: percentage,
           ),
         );
 
@@ -407,7 +413,9 @@ class SpecifiedStatRouteArgs {
     required this.title,
     required this.dataList,
     required this.heroWord,
+    required this.text,
     this.heroWordColor,
+    required this.percentage,
   });
 
   final _i22.Key? key;
@@ -418,11 +426,15 @@ class SpecifiedStatRouteArgs {
 
   final String heroWord;
 
+  final String text;
+
   final _i22.Color? heroWordColor;
+
+  final double percentage;
 
   @override
   String toString() {
-    return 'SpecifiedStatRouteArgs{key: $key, title: $title, dataList: $dataList, heroWord: $heroWord, heroWordColor: $heroWordColor}';
+    return 'SpecifiedStatRouteArgs{key: $key, title: $title, dataList: $dataList, heroWord: $heroWord, text: $text, heroWordColor: $heroWordColor, percentage: $percentage}';
   }
 }
 

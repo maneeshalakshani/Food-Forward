@@ -12,6 +12,7 @@ class ClickableContainer extends HookWidget {
     this.width,
     this.imgUrl,
     this.route,
+    this.otherFunction,
     required this.text
   }) : super(key: key);
 
@@ -22,11 +23,12 @@ class ClickableContainer extends HookWidget {
   final double? width;
   final route;
   final String? imgUrl;
+  final otherFunction;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: otherFunction ?? (){
         route != null 
           ? context.router.push(route)
           : null ;

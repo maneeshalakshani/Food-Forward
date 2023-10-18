@@ -12,12 +12,16 @@ class SpecifiedStatView extends HookWidget {
     required this.title,
     required this.dataList,
     required this.heroWord,
+    required this.text,
     this.heroWordColor,
+    required this.percentage,
   }) : super(key: key);
   final String title;
   final List<PieChartListData> dataList;
   final String heroWord;
   final Color? heroWordColor;
+  final String text;
+  final double percentage;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +54,7 @@ class SpecifiedStatView extends HookWidget {
                 ),
                 CustomPieChart(dataList: dataList,),
                 ClickableContainer(
-                  text: "You have made 18% of all donations",
+                  text: text,
                   bgColor: LIGHT_PINK,
                   textColor: BLACK,
                   width: width,
