@@ -8,11 +8,13 @@ class CustomeTextField extends HookWidget {
     this.prefixIcon,
     this.marginTop = 15,
     this.showTopLabel = false,
+    required this.controller,
   }) : super(key: key);
   final String label;
   final IconData? prefixIcon;
   final double? marginTop;
   final bool? showTopLabel;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +37,7 @@ class CustomeTextField extends HookWidget {
               ) 
             : const SizedBox(),
           TextFormField(
+            controller: controller,
             decoration: InputDecoration(
               hintText: 'Enter $label',
               labelText: label,

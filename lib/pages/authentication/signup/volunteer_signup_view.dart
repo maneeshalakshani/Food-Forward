@@ -15,6 +15,13 @@ class VolunteerSignUpView extends HookWidget {
 
   final ValueNotifier<String> deliveryPreference = ValueNotifier<String>('veg');
 
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController addressController = TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController contactNoController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -57,31 +64,37 @@ class VolunteerSignUpView extends HookWidget {
                     ),
                   ),
                 ),
-                const CustomeTextField(
+                CustomeTextField(
                   label: "Email",
                   prefixIcon: Icons.email,
                   marginTop: 30,
+                  controller: emailController,
                 ),
-                const CustomeTextField(
+                CustomeTextField(
                   label: "Name",
                   prefixIcon: Icons.person,
+                  controller: nameController,
                 ),
-                const CustomeTextField(
+                CustomeTextField(
                   label: "Address",
                   prefixIcon: Icons.home,
                   marginTop: 30,
+                  controller: addressController,
                 ),
-                const CustomeTextField(
+                CustomeTextField(
                   label: "Contact Number",
                   prefixIcon: Icons.contact_phone,
+                  controller: contactNoController,
                 ),
-                const CustomeTextField(
+                CustomeTextField(
                   label: "Password",
                   prefixIcon: Icons.password,
+                  controller: passwordController,
                 ),
-                const CustomeTextField(
+                CustomeTextField(
                   label: "Confirm Password",
                   prefixIcon: Icons.verified,
+                  controller: confirmPasswordController,
                 ),
                 userType == 'recipient'
                   ? StatefulBuilder(

@@ -36,6 +36,9 @@ dependencies:
   flutter_mobx: 2.0.6+1 
   flutter_hooks: 0.18.5+1  
   fl_chart: ^0.63.0
+  cloud_firestore: ^4.4.3
+  firebase_core : ^2.7.0
+  fluttertoast: ^8.2.2
 
 
   # The following adds the Cupertino Icons font to your application.

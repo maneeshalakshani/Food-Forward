@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "529756852285",
+    "project_id": "food-forward-3a32b",
+    "storage_bucket": "food-forward-3a32b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:529756852285:android:b1daf803dc3e52d3d0da54",
+        "android_client_info": {
+          "package_name": "com.example.food_forward"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9546mvMTZnnlWIZks4-7mqUBmdrR5bBc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

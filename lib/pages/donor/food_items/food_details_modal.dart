@@ -44,7 +44,7 @@ class FoodItemDetailsDialog extends StatelessWidget {
             ),
             SizedBox(
               width: double.infinity,
-              child: Image.asset(
+              child: Image.network(
                 img,
                 height: 150,
               ),
