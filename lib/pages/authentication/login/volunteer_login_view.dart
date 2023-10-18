@@ -8,11 +8,14 @@ import 'package:food_forward/pages/Components/textField.dart';
 import 'package:food_forward/routes/routes.gr.dart';
 
 class VolunteerLoginView extends HookWidget {
-  const VolunteerLoginView({
+  VolunteerLoginView({
     Key? key, 
     required this.userType,
   }) : super(key: key);
   final String userType;
+
+  TextEditingController userNameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -57,14 +60,16 @@ class VolunteerLoginView extends HookWidget {
                     color: Colors.red,
                   ),
                 ),
-                const CustomeTextField(
+                CustomeTextField(
                   label: "Username",
                   prefixIcon: Icons.email,
                   marginTop: 30,
+                  controller: userNameController,
                 ),
-                const CustomeTextField(
+                CustomeTextField(
                   label: "Password",
                   prefixIcon: Icons.password,
+                  controller: passwordController,
                 ),
                 SquareButton(
                   text: "login".toUpperCase(),

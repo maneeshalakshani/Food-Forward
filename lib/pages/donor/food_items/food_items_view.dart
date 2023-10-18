@@ -1,11 +1,13 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:food_forward/models/Food.dart';
 import 'package:food_forward/pages/Components/appbar.dart';
 import 'package:food_forward/pages/Components/sideNav.dart';
-import 'package:food_forward/pages/donor/food_items/food_details_modal.dart';
 import 'package:food_forward/pages/donor/food_items/food_item_card.dart';
 import 'package:food_forward/routes/routes.gr.dart';
+import 'package:food_forward/services/donor/donor_services.dart';
 
 class DonorFoodListView extends HookWidget {
   const DonorFoodListView({
@@ -29,7 +31,8 @@ class DonorFoodListView extends HookWidget {
       body: SingleChildScrollView(
         child: Container(
           width: width,
-          margin: const EdgeInsets.only(top: 30),
+          height: height/10*9,
+          margin: const EdgeInsets.only(top: 30, right: 20, left: 20),
           child: Column(
             children: [
               Title(
@@ -43,67 +46,37 @@ class DonorFoodListView extends HookWidget {
                     ),
                   ),
                 ),
-              Container(
-                height: height,
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                child: ListView.builder(
-                  itemCount: 5,
-                  itemBuilder: (context, index) {
-                    return FoodItemCard(
-                      img: 'assets/logo.png', 
-                      name: "Burger", 
-                      price: 300, 
-                      date: '03/10/2023',
-                      showFoodItem: (){
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return FoodItemDetailsDialog(
-                              img: 'assets/logo.png', 
-                              name: "Burger", 
-                              price: 300, 
-                              date: '03/10/2023',
-                              preference: "Veg", 
-                              availableQuantity: 10, 
-                              deleteOnPressed: () {
-                                Navigator.of(context).pop();
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: const Text("Confirm Delete"),
-                                      content: const Text("Are you sure you want to delete this item?"),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          child: const Text("Cancel"),
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                        ),
-                                        TextButton(
-                                          child: const Text("Delete"),
-                                          onPressed: () {
-                                            Navigator.of(context).pop(); 
-                                          },
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                              },
-                              updateOnPressed: () => context.router.push(const DonorUpdateFoodRoute()),
-                            );
-                          },
-                        );
-                      }
-                    );
+              Expanded(
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: DonorFunction().getAllFood(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return Text('Error ${snapshot.error}');
+                    }
+                    if (snapshot.hasData) {
+                      return buildList(context, snapshot.data?.docs);
+                    }
+                    return const Text("Loading...");
                   },
                 ),
-              )  
+              ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget buildList(BuildContext context, List<DocumentSnapshot>? snapshot) {
+    return ListView.builder(
+      itemCount: snapshot!.length,
+      itemBuilder: (context, int index) {
+        return FoodItemCard(
+          context: context,
+          data: snapshot[index],
+          updateRoute: DonorUpdateFoodRoute(food: Food.fromSnapshot(snapshot[index])),
+        );
+      },
     );
   }
 }

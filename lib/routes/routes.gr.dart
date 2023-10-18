@@ -15,6 +15,7 @@ import 'package:auto_route/auto_route.dart' as _i20;
 import 'package:flutter/material.dart' as _i21;
 
 import '../models/Cart.dart' as _i23;
+import '../models/Food.dart' as _i24;
 import '../pages/authentication/login/volunteer_login_view.dart' as _i8;
 import '../pages/authentication/signup/volunteer_signup_view.dart' as _i9;
 import '../pages/donor/add_food/add_food_view.dart' as _i18;
@@ -171,15 +172,21 @@ class AppRouter extends _i20.RootStackRouter {
       );
     },
     DonorAddFoodRoute.name: (routeData) {
+      final args = routeData.argsAs<DonorAddFoodRouteArgs>(
+          orElse: () => const DonorAddFoodRouteArgs());
       return _i20.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i18.DonorAddFoodView(),
+        child: _i18.DonorAddFoodView(key: args.key),
       );
     },
     DonorUpdateFoodRoute.name: (routeData) {
+      final args = routeData.argsAs<DonorUpdateFoodRouteArgs>();
       return _i20.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i19.DonorUpdateFoodView(),
+        child: _i19.DonorUpdateFoodView(
+          key: args.key,
+          food: args.food,
+        ),
       );
     },
   };
@@ -609,24 +616,59 @@ class DonorFoodListRoute extends _i20.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i18.DonorAddFoodView]
-class DonorAddFoodRoute extends _i20.PageRouteInfo<void> {
-  const DonorAddFoodRoute()
+class DonorAddFoodRoute extends _i20.PageRouteInfo<DonorAddFoodRouteArgs> {
+  DonorAddFoodRoute({_i21.Key? key})
       : super(
           DonorAddFoodRoute.name,
           path: '/donor-add-food-view',
+          args: DonorAddFoodRouteArgs(key: key),
         );
 
   static const String name = 'DonorAddFoodRoute';
 }
 
+class DonorAddFoodRouteArgs {
+  const DonorAddFoodRouteArgs({this.key});
+
+  final _i21.Key? key;
+
+  @override
+  String toString() {
+    return 'DonorAddFoodRouteArgs{key: $key}';
+  }
+}
+
 /// generated route for
 /// [_i19.DonorUpdateFoodView]
-class DonorUpdateFoodRoute extends _i20.PageRouteInfo<void> {
-  const DonorUpdateFoodRoute()
-      : super(
+class DonorUpdateFoodRoute
+    extends _i20.PageRouteInfo<DonorUpdateFoodRouteArgs> {
+  DonorUpdateFoodRoute({
+    _i21.Key? key,
+    required _i24.Food food,
+  }) : super(
           DonorUpdateFoodRoute.name,
           path: '/donor-update-food-view',
+          args: DonorUpdateFoodRouteArgs(
+            key: key,
+            food: food,
+          ),
         );
 
   static const String name = 'DonorUpdateFoodRoute';
+}
+
+class DonorUpdateFoodRouteArgs {
+  const DonorUpdateFoodRouteArgs({
+    this.key,
+    required this.food,
+  });
+
+  final _i21.Key? key;
+
+  final _i24.Food food;
+
+  @override
+  String toString() {
+    return 'DonorUpdateFoodRouteArgs{key: $key, food: $food}';
+  }
 }
