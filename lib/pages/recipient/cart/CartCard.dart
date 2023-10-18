@@ -16,11 +16,11 @@ class CartCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        title: Text(item.name),
+        title: Text(item.food.name),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Price: ${item.price}'),
+            Text('Price: ${item.food.price}'),
             Row(
               children: [
                 IconButton(

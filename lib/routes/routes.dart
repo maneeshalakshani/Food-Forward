@@ -8,6 +8,7 @@ import 'package:food_forward/pages/profile/profile_view.dart';
 import 'package:food_forward/pages/recipient/cart/cart_view.dart';
 import 'package:food_forward/pages/recipient/cart/order_confirmation/order_confirmation_view.dart';
 import 'package:food_forward/pages/recipient/explorer/explorer_view.dart';
+import 'package:food_forward/pages/recipient/my_orders/my_orders_view.dart';
 import 'package:food_forward/pages/stats/my_stats_view.dart';
 import 'package:food_forward/pages/stats/specified_stat_view/specified_stat_view.dart';
 import 'package:food_forward/pages/tips/expanded_tip/expanded_tip_view.dart';
@@ -44,6 +45,7 @@ import 'package:food_forward/pages/volunteer/notifications/my_notifications_view
     MaterialRoute(page: DonorFoodListView),
     MaterialRoute(page: DonorAddFoodView),
     MaterialRoute(page: DonorUpdateFoodView),
+    MaterialRoute(page: MyOrdersView),
   ],
 )
 class $AppRouter {}

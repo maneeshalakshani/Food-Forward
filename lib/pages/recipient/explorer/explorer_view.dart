@@ -1,12 +1,11 @@
-import 'package:auto_route/auto_route.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:food_forward/models/Cart.dart';
-import 'package:food_forward/models/CartItem.dart';
 import 'package:food_forward/pages/Components/appbar.dart';
 import 'package:food_forward/pages/Components/sideNav.dart';
 import 'package:food_forward/pages/recipient/explorer/explorer_card.dart';
-import 'package:food_forward/routes/routes.gr.dart';
+import 'package:food_forward/services/donor/donor_services.dart';
 
 class ExplorerView extends HookWidget {
   const ExplorerView({
@@ -18,7 +17,6 @@ class ExplorerView extends HookWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    Cart cart = Cart();
 
     return Scaffold(
       appBar: appBar(),
@@ -26,6 +24,7 @@ class ExplorerView extends HookWidget {
       body: SingleChildScrollView(
         child: Container(
           width: width,
+          height: height/10*9,
           margin: EdgeInsets.only(top: 30),
           child: Column(
             children: [
@@ -40,22 +39,17 @@ class ExplorerView extends HookWidget {
                     ),
                   ),
                 ),
-              Container(
-                height: height,
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                child: ListView.builder(
-                  itemCount: 5,
-                  itemBuilder: (context, index) {
-                    return ExplorerCard(
-                      img: 'assets/logo.png', 
-                      name: "Food Name abc1", 
-                      price: 300, 
-                      addToCart: (){
-                        CartItem item = CartItem("Food Name abc1", 300, 1);
-                        cart.addItem(item);
-                        context.router.push(CartRoute(cart: cart));
-                      }
-                    );
+              Expanded(
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: DonorFunction().getAllFood(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return Text('Error ${snapshot.error}');
+                    }
+                    if (snapshot.hasData) {
+                      return buildList(context, snapshot.data?.docs);
+                    }
+                    return const Text("Loading...");
                   },
                 ),
               )  
@@ -65,4 +59,19 @@ class ExplorerView extends HookWidget {
       ),
     );
   }
+
+  Widget buildList(BuildContext context, List<DocumentSnapshot>? snapshot) {
+    Cart cart = Cart();
+    return ListView.builder(
+      itemCount: snapshot!.length,
+      itemBuilder: (context, int index) {
+        return ExplorerCard(
+          context: context,
+          data: snapshot[index],
+          cart: cart,
+        );
+      },
+    );
+  }
+  
 }
