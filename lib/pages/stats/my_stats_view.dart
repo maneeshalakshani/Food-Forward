@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:food_forward/const.dart';
@@ -5,6 +6,7 @@ import 'package:food_forward/pages/Components/appbar.dart';
 import 'package:food_forward/pages/Components/clickable_container.dart';
 import 'package:food_forward/pages/stats/specified_stat_view/pieChartData.dart';
 import 'package:food_forward/routes/routes.gr.dart';
+import 'package:food_forward/services/user_services.dart';
 
 class MyStatsView extends HookWidget {
   const MyStatsView({
@@ -48,41 +50,106 @@ class MyStatsView extends HookWidget {
                 width: width,
                 bgColor: LIGHT_PINK,
                 textColor: BLACK,
-                route: SpecifiedStatRoute(
-                  title: "Total Donations",
-                  dataList: totalDonationlistData,
-                  heroWord: "You're a true warrior!",
-                  heroWordColor: Colors.pink,
-                ),
+                otherFunction: () async {
+                  final text = await getText(statType: 'donation');
+                  final percentage = await getPercentage(statType: 'donation');
+
+                  List<PieChartListData> totalDonationlistData = [
+                    PieChartListData(color: Colors.pink, value: percentage),
+                    PieChartListData(color: Colors.orange, value: 100.0-percentage),
+                  ];
+
+                  context.router.push(SpecifiedStatRoute(
+                    title: "Total Donations",
+                    dataList: totalDonationlistData,
+                    heroWord: "You're a true warrior!",
+                    heroWordColor: Colors.pink,
+                    text: text,
+                    percentage: percentage
+                  ));
+                },
               ),
               ClickableContainer(
                 text: "Community Contributions",
                 width: width,
                 bgColor: LIGHT_PINK,
                 textColor: BLACK,
-                route: SpecifiedStatRoute(
-                  title: "Community Contributions",
-                  dataList: communitylistData,
-                  heroWord: "You're a community hero!",
-                  heroWordColor: const Color.fromARGB(255, 45, 120, 154),
-                ),
+                otherFunction: () async {
+                  final text = await getText(statType: 'community');
+                  final percentage = await getPercentage(statType: 'community');
+
+                  List<PieChartListData> communitylistData = [
+                    PieChartListData(color: Colors.green, value: percentage),
+                    PieChartListData(color: Colors.blue, value: 100.0-percentage),
+                  ];
+
+
+                  context.router.push(SpecifiedStatRoute(
+                    title: "Community Contributions",
+                    dataList: communitylistData,
+                    heroWord: "You're a community hero!",
+                    heroWordColor: const Color.fromARGB(255, 45, 120, 154),
+                    text: text,
+                    percentage: percentage
+                  ));
+                },
               ),
               ClickableContainer(
                 text: "Environmental Impact",
                 width: width,
                 bgColor: LIGHT_PINK,
                 textColor: BLACK,
-                route: SpecifiedStatRoute(
-                  title: "Environmental Impact",
-                  dataList: tEnvironmentlistData,
-                  heroWord: "You're a green guardian!",
-                  heroWordColor: const Color.fromARGB(255, 52, 149, 102),
-                ),
+                otherFunction: () async {
+                  final text = await getText(statType: 'env');
+                  final percentage = await getPercentage(statType: 'env');
+
+                  List<PieChartListData> tEnvironmentlistData = [
+                    PieChartListData(color: Colors.red, value: percentage),
+                    PieChartListData(color: Colors.yellow, value: 100.0-percentage),
+                  ];
+
+                  context.router.push(SpecifiedStatRoute(
+                    title: "Environmental Impact",
+                    dataList: tEnvironmentlistData,
+                    heroWord: "You're a green guardian!",
+                    heroWordColor: const Color.fromARGB(255, 52, 149, 102),
+                    text: text,
+                    percentage: percentage
+                  ));
+                },
               ),
             ],
           ),
         ),
       ),
     );
+  }
+
+
+  getPercentage({required String statType}) async {
+    UserUtilities userUtilities = UserUtilities();
+    double totDonations = await userUtilities.getTotalDonation();
+    double envImpact = await userUtilities.calculateEnvironmentalImpactRatio();
+    double comContributions = userUtilities.calculateCommunityContributionsPercentage(envImpact, totDonations);
+
+    if(statType == 'donation'){
+      return totDonations;
+    }else if(statType == 'community'){
+      return comContributions;
+    }else{
+      return envImpact;
+    }
+  }
+
+  getText({required String statType}) async {
+    double percentage = await getPercentage(statType: statType);
+    String formattedPercentage = percentage.toStringAsFixed(2); // Round to 2 decimal places
+    if(statType == 'donation'){
+      return "You have made $formattedPercentage% of all Donations";
+    }else if(statType == 'community'){
+      return "You have made $formattedPercentage% of all Community Contributions";
+    }else{
+      return "You have saved $formattedPercentage% of CO2 emmissions & contributed to greener planet";
+    }
   }
 }

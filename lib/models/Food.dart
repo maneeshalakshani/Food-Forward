@@ -8,6 +8,7 @@ class Food {
   late String foodPreference;
   late String imageUrl;
   late int environmentalImpact;
+  late String userId;
 
   late DocumentReference documentReference;
 
@@ -19,6 +20,7 @@ class Food {
     required this.foodPreference,
     required this.imageUrl,
     required this.environmentalImpact,
+    required this.userId,
   });
 
   Food.fromMap(Map<String, dynamic> map, {required this.documentReference}) {
@@ -29,6 +31,7 @@ class Food {
     foodPreference = map["foodPreference"];
     imageUrl = map["imageUrl"];
     environmentalImpact = map["environmentalImpact"];
+    userId = map["userId"];
   }
 
   Food.fromSnapshot(DocumentSnapshot snapshot)
@@ -44,6 +47,7 @@ class Food {
       'foodPreference': foodPreference,
       'imageUrl': imageUrl,
       'environmentalImpact': environmentalImpact,
+      'userId': userId,
     };
   }
 }

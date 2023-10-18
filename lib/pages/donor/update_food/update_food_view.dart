@@ -139,6 +139,7 @@ class DonorUpdateFood extends HookWidget {
                     imageUrl: food.imageUrl,
                     environmentalImpact: int.parse(envImpactController.text),
                     context: context,
+                    userId: food.userId,
                     route: const DonorFoodListRoute()
                   );
                     // context.router.push(const DonorFoodListRoute());
