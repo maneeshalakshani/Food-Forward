@@ -21,7 +21,7 @@ class RecipientFunction {
       required route,
   }) async {
 
-    OrderClass orderClass = OrderClass(userId: userId, cartItems: cartItems, orderStatus: "Pending");
+    OrderClass orderClass = OrderClass(userId: userId, cartItems: cartItems, orderStatus: "Pending", latitude: "70.4522", longitude: "80.3452");
     try {
       FirebaseFirestore.instance
           .runTransaction((Transaction transaction) async {
