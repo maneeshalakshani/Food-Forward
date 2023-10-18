@@ -1,23 +1,27 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:food_forward/models/Cart.dart';
+import 'package:food_forward/models/CartItem.dart';
+import 'package:food_forward/models/Food.dart';
+import 'package:food_forward/routes/routes.gr.dart';
 
 class ExplorerCard extends HookWidget {
   const ExplorerCard({
     Key? key, 
-    required this.img,
-    required this.name,
-    required this.price,
-    required this.addToCart,
+    required this.context,
+    required this.data,
+    required this.cart,
   }) : super(key: key);
-  
-  final String img;
-  final String name;
-  final double price;
-  final void Function()? addToCart;
+  final BuildContext context;
+  final DocumentSnapshot data;
+  final Cart cart;
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    final food = Food.fromSnapshot(data);
 
     return Card(
       color: const Color.fromARGB(255, 236, 236, 236),
@@ -27,8 +31,8 @@ class ExplorerCard extends HookWidget {
             children: [
               Container(
                 width: width/5* 1.5,
-                child: Image.asset(
-                  "assets/delivery.png",
+                child: Image.network(
+                  food.imageUrl,
                   height: 70,
                 ),
               ),
@@ -39,21 +43,25 @@ class ExplorerCard extends HookWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      name,
+                      food.name,
                       style: const TextStyle(
                         color: Colors.red,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Text(
-                      "RS. $price",
+                      "RS. ${food.price}",
                       style: const TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     InkWell(
-                      onTap: addToCart,
+                      onTap: (){
+                        CartItem item = CartItem(food: food, noOfItems: 1);
+                        cart.addItem(item);
+                        context.router.push(CartRoute(cart: cart));
+                      },
                       child: Icon(Icons.add),
                     ),
                   ],

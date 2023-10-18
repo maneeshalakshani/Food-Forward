@@ -1,10 +1,10 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:food_forward/models/Cart.dart';
 import 'package:food_forward/pages/Components/appbar.dart';
 import 'package:food_forward/pages/Components/sideNav.dart';
 import 'package:food_forward/pages/Components/squareButton.dart';
 import 'package:food_forward/routes/routes.gr.dart';
+import 'package:food_forward/services/recipient/recipientSerices.dart';
 import 'CartCard.dart';
 
 class CartView extends StatefulWidget {
@@ -53,7 +53,15 @@ class _CartViewState extends State<CartView> {
               ),
             ),
             SquareButton(
-              onPressed: () => context.router.push(OrderConfirmRoute(orderNo: "afc7687JJe3")), 
+              onPressed: (){
+                RecipientFunction().createOrder(
+                  userId: "aerg", 
+                  cartItems: widget.cart.items, 
+                  context: context, 
+                  route: OrderConfirmRoute(orderNo: "afc7687JJe3")
+                );
+                // context.router.push(OrderConfirmRoute(orderNo: "afc7687JJe3"));
+              }, 
               text: "Place Order"
             )
           ],

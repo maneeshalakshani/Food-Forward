@@ -51,13 +51,13 @@ class OrderConfirmView extends HookWidget {
                 ),
               ),
               SizedBox(height: 30),
-              Text(
-                "Order No: $orderNo",
-                style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.black,
-                ),
-              ),
+              // Text(
+              //   "Order No: $orderNo",
+              //   style: TextStyle(
+              //     fontSize: 25,
+              //     color: Colors.black,
+              //   ),
+              // ),
               SizedBox(height: 30),
               Text(
                 "One of our volunteers will Contact you Soon".toUpperCase(),
@@ -83,7 +83,7 @@ class OrderConfirmView extends HookWidget {
                 text: "OK",
               ),
               SquareButton(
-                onPressed: () => context.router.push(const ExplorerRoute()),
+                onPressed: () => context.router.push(const MyOrdersRoute()),
                 text: "View My Orders",
                 btnColor: const Color.fromARGB(255, 60, 17, 14),
               ),
