@@ -14,8 +14,8 @@ class VolunteerLoginView extends HookWidget {
   }) : super(key: key);
   final String userType;
 
-  TextEditingController userNameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  final TextEditingController userNameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

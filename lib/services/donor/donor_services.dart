@@ -9,6 +9,7 @@ class DonorFunction {
   getAllFood() {
     return FirebaseFirestore.instance
         .collection(fireStoreCollectionName)
+        .orderBy('expiryDate')
         .snapshots();
   }
 
