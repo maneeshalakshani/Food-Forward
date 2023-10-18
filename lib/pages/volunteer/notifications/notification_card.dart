@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:food_forward/models/Order.dart';
 import 'package:food_forward/pages/Components/squareButton.dart';
 import 'package:food_forward/routes/routes.gr.dart';
+import 'package:food_forward/services/recipient/recipientSerices.dart';
 import 'package:food_forward/services/volunteer/volunteer_services.dart';
 
 class NotificationCard extends HookWidget {
@@ -77,6 +78,7 @@ class NotificationCard extends HookWidget {
                     taskStatus: "Pending",
                     latitude: order.latitude,
                     longitude: order.longitude,
+                    orderClass: order,
                   );
                 }, 
                 text: "Accept",
@@ -85,14 +87,21 @@ class NotificationCard extends HookWidget {
                 btnPadding: const EdgeInsets.symmetric(vertical: 0),
                 btnMargin: const EdgeInsets.symmetric(vertical: 10),
               ),
-              // SquareButton(
-              //   onPressed: rejectOnPress, 
-              //   text: "Decline",
-              //   btnColor: Colors.red,
-              //   btnWidth: 100,
-              //   btnPadding: const EdgeInsets.symmetric(vertical: 0),
-              //   btnMargin: const EdgeInsets.symmetric(vertical: 10),
-              // )
+              SquareButton(
+                onPressed: (){
+                  RecipientFunction().updateOrderPickedField(
+                    orderClass: order, 
+                    picked: "reject", 
+                    context: context, 
+                    route: null
+                  );
+                }, 
+                text: "Decline",
+                btnColor: Colors.red,
+                btnWidth: 100,
+                btnPadding: const EdgeInsets.symmetric(vertical: 0),
+                btnMargin: const EdgeInsets.symmetric(vertical: 10),
+              )
             ],
           )
         ],

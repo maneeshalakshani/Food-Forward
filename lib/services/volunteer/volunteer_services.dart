@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:food_forward/models/MyTask.dart';
+import 'package:food_forward/models/Order.dart';
+import 'package:food_forward/services/recipient/recipientSerices.dart';
 
 class VolunteerFunctions {
   String fireStoreCollectionName = "MyTasks";
@@ -9,6 +11,7 @@ class VolunteerFunctions {
   getAllMyTasks() {
     return FirebaseFirestore.instance
         .collection(fireStoreCollectionName)
+        .where('taskStatus', isEqualTo: 'Pending')
         .snapshots();
   }
 
@@ -20,6 +23,7 @@ class VolunteerFunctions {
       required String taskStatus,
       required String latitude,
       required String longitude,
+      required OrderClass orderClass,
   }) async {
 
     MyTask myTask = MyTask(
@@ -39,6 +43,14 @@ class VolunteerFunctions {
             .then((value) {
               context.router.push(route);
             });
+      })
+      .then((value) {
+        RecipientFunction().updateOrderPickedField(
+          orderClass: orderClass, 
+          picked: "Picked", 
+          context: context, 
+          route: null
+        );
       });
     } catch (e) {
       print(e.toString());

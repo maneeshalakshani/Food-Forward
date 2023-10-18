@@ -14,6 +14,13 @@ class RecipientFunction {
         .snapshots();
   }
 
+  getAllOrdersForNotification() {
+    return FirebaseFirestore.instance
+      .collection(fireStoreCollectionName)
+      .where('picked', isEqualTo: 'Pending')
+      .snapshots();
+  }
+
   createOrder(
       {required String userId,
       required List<CartItem> cartItems,
@@ -21,7 +28,7 @@ class RecipientFunction {
       required route,
   }) async {
 
-    OrderClass orderClass = OrderClass(userId: userId, cartItems: cartItems, orderStatus: "Pending", latitude: "70.4522", longitude: "80.3452");
+    OrderClass orderClass = OrderClass(userId: userId, cartItems: cartItems, orderStatus: "Pending", latitude: "70.4522", longitude: "80.3452", picked: "Pending");
     try {
       FirebaseFirestore.instance
           .runTransaction((Transaction transaction) async {
@@ -43,6 +50,7 @@ class RecipientFunction {
     required String userId,
     required List<CartItem> cartItems,
     required BuildContext context,
+    required String picked,
     required route,
   }) {
     try {
@@ -50,13 +58,32 @@ class RecipientFunction {
         await transaction.update(orderClass.documentReference, {
           'userId': userId,
           'cartItems': cartItems,
+          'picked': picked,
         });
       })
-      .then((value) => context.router.push(route));
+      .then((value) => route == null ? null : context.router.push(route));
     } catch (e) {
       print(e.toString());
     }
   }
+
+  updateOrderPickedField({
+    required OrderClass orderClass,
+    required String picked,
+    required BuildContext context,
+    required route,
+  }) {
+    try {
+      FirebaseFirestore.instance.runTransaction((transaction) async {
+        await transaction.update(orderClass.documentReference, {
+          'picked': picked,
+        });
+      }).then((value) => route == null ? null : context.router.push(route));
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
 
   deleteOrder({required OrderClass orderClass, required BuildContext context}) {
     FirebaseFirestore.instance.runTransaction((Transaction transaction) async {

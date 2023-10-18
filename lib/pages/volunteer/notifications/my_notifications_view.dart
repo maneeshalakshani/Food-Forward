@@ -33,7 +33,7 @@ class VolunteerNotificationsView extends HookWidget {
             ),
             Expanded(
               child: StreamBuilder<QuerySnapshot>(
-                stream: RecipientFunction().getAllOrders(),
+                stream: RecipientFunction().getAllOrdersForNotification(),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
                     return Text('Error ${snapshot.error}');
