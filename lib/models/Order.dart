@@ -7,14 +7,27 @@ class OrderClass {
   late List<CartItem> cartItems;
   DateTime dateTime = DateTime.now();
   late String orderStatus;
+  late String latitude;
+  late String longitude;
+  late String picked;
 
   late DocumentReference documentReference;
 
-  OrderClass({ required this.userId, required this.cartItems, required this.orderStatus });
+  OrderClass({ 
+    required this.userId, 
+    required this.cartItems, 
+    required this.orderStatus, 
+    required this.latitude,
+    required this.longitude,
+    required this.picked,
+  });
 
   OrderClass.fromMap(Map<String, dynamic> map, {required this.documentReference}) {
     userId = map["userId"];
     orderStatus = map["orderStatus"];
+    longitude = map["longitude"];
+    latitude = map["latitude"];
+    picked = map["picked"];
     if (map["cartItems"] != null) {
       // Convert the list of dynamic items to List<CartItem>
       cartItems = (map["cartItems"] as List<dynamic>)
@@ -34,6 +47,9 @@ class OrderClass {
       'cartItems': cartItemsToJson(),
       'dateTime': dateTime,
       'orderStatus': orderStatus,
+      'longitude': longitude,
+      'latitude': latitude,
+      'picked': picked,
     };
   }
 

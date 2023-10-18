@@ -58,7 +58,7 @@ class _CartViewState extends State<CartView> {
                   userId: "aerg", 
                   cartItems: widget.cart.items, 
                   context: context, 
-                  route: OrderConfirmRoute(orderNo: "afc7687JJe3")
+                  route: OrderConfirmRoute(orderNo: "afc7687JJe3"),
                 );
                 // context.router.push(OrderConfirmRoute(orderNo: "afc7687JJe3"));
               }, 
