@@ -5,7 +5,9 @@ import 'package:food_forward/pages/Components/appbar.dart';
 import 'package:food_forward/pages/Components/sideNav.dart';
 import 'package:food_forward/pages/Components/squareButton.dart';
 import 'package:food_forward/pages/Components/textField.dart';
+import 'package:food_forward/pages/donor/add_food/date_picker.dart';
 import 'package:food_forward/pages/donor/add_food/food_preference_selection.dart';
+import 'package:food_forward/pages/donor/add_food/food_state.dart';
 import 'package:food_forward/routes/routes.gr.dart';
 import 'package:food_forward/services/donor/donor_services.dart';
 
@@ -20,21 +22,23 @@ class DonorUpdateFoodView extends StatefulWidget {
 
 class _DonorUpdateFoodViewState extends State<DonorUpdateFoodView> {
   final TextEditingController foodNameController = TextEditingController();
-  final TextEditingController expiryController = TextEditingController();
+  // final TextEditingController expiryController = TextEditingController();
   final TextEditingController quantityController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final TextEditingController envImpactController = TextEditingController();
   var selectedPreference; 
+  FoodStore store = FoodStore();
 
   @override
   void initState() {
     super.initState();
     foodNameController.text = widget.food.name;
-    expiryController.text = widget.food.expiryDate;
+    // expiryController.text = widget.food.expiryDate;
     quantityController.text = widget.food.quantity;
     priceController.text = widget.food.price;
     selectedPreference = widget.food.foodPreference;
     envImpactController.text = widget.food.environmentalImpact.toString();
+    store.setSelectedDate(selectedDate: widget.food.expiryDate);
   }
 
   @override
@@ -42,12 +46,13 @@ class _DonorUpdateFoodViewState extends State<DonorUpdateFoodView> {
     selectedPreference = widget.food.foodPreference;
     return DonorUpdateFood(
       food: widget.food, 
-      expiryController: expiryController, 
+      // expiryController: expiryController, 
       foodNameController: foodNameController, 
       priceController: priceController, 
       quantityController: quantityController, 
       selectedPreference: selectedPreference,
       envImpactController: envImpactController,
+      store: store,
     );
   }
 }
@@ -57,20 +62,22 @@ class DonorUpdateFood extends HookWidget {
   DonorUpdateFood({
     Key? key,
     required this.food,
-    required this.expiryController,
+    // required this.expiry,
     required this.foodNameController, 
     required this.priceController,
     required this.quantityController,
     required this.selectedPreference,
     required this.envImpactController,
+    required this.store,
   }) : super(key: key);
   final Food food;
   final TextEditingController foodNameController;
-  final TextEditingController expiryController;
+  // final TextEditingController expiryController;
   final TextEditingController quantityController;
   final TextEditingController priceController;
   final TextEditingController envImpactController;
   var selectedPreference; 
+  FoodStore store;
 
   @override
   Widget build(BuildContext context) {
@@ -111,11 +118,12 @@ class DonorUpdateFood extends HookWidget {
                 showTopLabel: true,
                 controller: quantityController,
               ),
-              CustomeTextField(
-                label: "Expiry Date",
-                showTopLabel: true,
-                controller: expiryController,
-              ),
+              // CustomeTextField(
+              //   label: "Expiry Date",
+              //   showTopLabel: true,
+              //   controller: expiryController,
+              // ),
+              DatePickerWidget(store: store),
               CustomeTextField(
                 label: "Environmental Impact",
                 showTopLabel: true,
@@ -134,7 +142,7 @@ class DonorUpdateFood extends HookWidget {
                     name: foodNameController.text, 
                     price: priceController.text, 
                     quantity: quantityController.text, 
-                    expiryDate: expiryController.text, 
+                    expiryDate: store.selectedDate, 
                     foodPreference: selectedPreference, 
                     imageUrl: food.imageUrl,
                     environmentalImpact: int.parse(envImpactController.text),

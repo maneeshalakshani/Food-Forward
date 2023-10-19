@@ -61,7 +61,7 @@ class FoodItemCard extends HookWidget {
                       ),
                     ),
                     Text(
-                      "Expiry Date: ${food.expiryDate}",
+                      "Expiry Date: ${food.expiryDate.toString().split(" ")[0]}",
                       style: const TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -74,7 +74,7 @@ class FoodItemCard extends HookWidget {
                 margin: const EdgeInsets.only(right: 20),
                 child: GestureDetector(
                   onTap: () => showFoodItem(
-                    date: food.expiryDate,
+                    date: food.expiryDate.toString().split(' ')[0],
                     name: food.name,
                     imageUrl: food.imageUrl,
                     preference: food.foodPreference,

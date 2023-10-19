@@ -100,47 +100,6 @@ class VolunteerProfileView extends HookWidget {
                   },
                 ),
               ),
-              // Container(
-              //   color: const Color.fromARGB(255, 207, 207, 207),
-              //   height: height/10 * 5,
-              //   width: width/5 * 4,
-              //   margin: const EdgeInsets.symmetric(vertical: 15),
-              //   child: Column(
-              //     children: [
-              //       Padding(
-              //         padding: const EdgeInsets.symmetric(vertical: 20),
-              //         child: CircleAvatar(
-              //           maxRadius: 70,
-              //           backgroundImage: AssetImage(
-              //             "assets/avatar.png",
-              //           ),
-              //         ),
-              //       ),
-              //       Text(
-              //         "Volunteer Distributor",
-              //         style: TextStyle(
-              //           color: Colors.red,
-              //         ),
-              //       ),
-              //       LabelDataViewer(
-              //         label: "Name", 
-              //         text: getUserData()['name'],
-              //       ),
-              //       LabelDataViewer(
-              //         label: "Email", 
-              //         text: "gkjhsrf@gmail.com",
-              //       ),
-              //       LabelDataViewer(
-              //         label: "Address", 
-              //         text: "No 10. ABC Street, Galle road, colombo",
-              //       ),
-              //       LabelDataViewer(
-              //         label: "Tel", 
-              //         text: "1231231234",
-              //       ),
-              //     ],
-              //   ),
-              // ),
               SquareButton(
                 onPressed: () => context.router.push(const VolunteerNotificationsRoute()), 
                 text: "View Notifications"

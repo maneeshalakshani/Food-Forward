@@ -15,7 +15,8 @@ class _FoodPreferenceSelectionState extends State<FoodPreferenceSelection> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(left: 30, right: 30, top: 30),
+      margin: const EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 10),
+      color: Colors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

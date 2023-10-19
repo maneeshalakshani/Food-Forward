@@ -8,6 +8,7 @@ class CustomeTextField extends HookWidget {
     this.prefixIcon,
     this.marginTop = 15,
     this.showTopLabel = false,
+    this.textColor = Colors.black,
     required this.controller,
   }) : super(key: key);
   final String label;
@@ -15,6 +16,7 @@ class CustomeTextField extends HookWidget {
   final double? marginTop;
   final bool? showTopLabel;
   final TextEditingController controller;
+  final Color? textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +32,9 @@ class CustomeTextField extends HookWidget {
                 padding: const EdgeInsets.only(top: 20, bottom: 10),
                 child: Text(
                     label,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.bold,
+                      color: textColor,
                     ),
                   ),
               ) 
@@ -40,6 +43,9 @@ class CustomeTextField extends HookWidget {
             controller: controller,
             decoration: InputDecoration(
               hintText: 'Enter $label',
+              labelStyle: TextStyle(
+                color: textColor,
+              ),
               labelText: label,
               filled: true,
               fillColor: const Color.fromARGB(168, 227, 226, 226),
