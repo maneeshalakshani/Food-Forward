@@ -25,7 +25,7 @@ class ImagePickerWidget extends HookWidget {
           child: const Text("Upload Image")
         ),
         Observer(builder: (BuildContext context){
-          return Text(store.uploadedImageLink ?? 'Image');
+          return Text(store.uploadedImageLink ?? 'Image', style: TextStyle(color: Colors.white),);
         }),
       ],
     );

@@ -4,7 +4,7 @@ class Food {
   late String name;
   late String price;
   late String quantity;
-  late String expiryDate;
+  late DateTime expiryDate;
   late String foodPreference;
   late String imageUrl;
   late int environmentalImpact;
@@ -27,7 +27,7 @@ class Food {
     name = map["name"];
     price = map["price"];
     quantity = map["quantity"];
-    expiryDate = map["expiryDate"];
+    expiryDate = (map["expiryDate"] as Timestamp).toDate();
     foodPreference = map["foodPreference"];
     imageUrl = map["imageUrl"];
     environmentalImpact = map["environmentalImpact"];

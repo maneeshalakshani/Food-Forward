@@ -11,8 +11,16 @@ abstract class _FoodStore with Store {
   @observable
   String? uploadedImageLink;
 
+  @observable
+  DateTime selectedDate = DateTime.now();
+
   @action
   void setUploadedImageLink({String? uploadedImageLink}) {
     this.uploadedImageLink = uploadedImageLink;
+  }
+
+  @action
+  void setSelectedDate({required DateTime selectedDate}) {
+    this.selectedDate = selectedDate;
   }
 }

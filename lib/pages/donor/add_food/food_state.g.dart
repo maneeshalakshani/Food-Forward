@@ -25,6 +25,22 @@ mixin _$FoodStore on _FoodStore, Store {
     });
   }
 
+  late final _$selectedDateAtom =
+      Atom(name: '_FoodStore.selectedDate', context: context);
+
+  @override
+  DateTime get selectedDate {
+    _$selectedDateAtom.reportRead();
+    return super.selectedDate;
+  }
+
+  @override
+  set selectedDate(DateTime value) {
+    _$selectedDateAtom.reportWrite(value, super.selectedDate, () {
+      super.selectedDate = value;
+    });
+  }
+
   late final _$_FoodStoreActionController =
       ActionController(name: '_FoodStore', context: context);
 
@@ -40,9 +56,21 @@ mixin _$FoodStore on _FoodStore, Store {
   }
 
   @override
+  void setSelectedDate({required DateTime selectedDate}) {
+    final _$actionInfo = _$_FoodStoreActionController.startAction(
+        name: '_FoodStore.setSelectedDate');
+    try {
+      return super.setSelectedDate(selectedDate: selectedDate);
+    } finally {
+      _$_FoodStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
-uploadedImageLink: ${uploadedImageLink}
+uploadedImageLink: ${uploadedImageLink},
+selectedDate: ${selectedDate}
     ''';
   }
 }
