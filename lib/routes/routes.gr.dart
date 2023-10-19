@@ -60,9 +60,14 @@ class AppRouter extends _i21.RootStackRouter {
       );
     },
     MyProfileRoute.name: (routeData) {
+      final args = routeData.argsAs<MyProfileRouteArgs>();
       return _i21.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i3.MyProfileView(),
+        child: _i3.MyProfileView(
+          key: args.key,
+          userId: args.userId,
+          name: args.name,
+        ),
       );
     },
     MyStatsRoute.name: (routeData) {
@@ -110,6 +115,8 @@ class AppRouter extends _i21.RootStackRouter {
         child: _i8.VolunteerLoginView(
           key: args.key,
           userType: args.userType,
+          showAnalytics: args.showAnalytics,
+          labelUser: args.labelUser,
         ),
       );
     },
@@ -120,6 +127,7 @@ class AppRouter extends _i21.RootStackRouter {
         child: _i9.VolunteerSignUpView(
           key: args.key,
           userType: args.userType,
+          labelUser: args.labelUser,
         ),
       );
     },
@@ -313,14 +321,41 @@ class ProfileRoute extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.MyProfileView]
-class MyProfileRoute extends _i21.PageRouteInfo<void> {
-  const MyProfileRoute()
-      : super(
+class MyProfileRoute extends _i21.PageRouteInfo<MyProfileRouteArgs> {
+  MyProfileRoute({
+    _i22.Key? key,
+    required String userId,
+    required String name,
+  }) : super(
           MyProfileRoute.name,
           path: '/myProfile',
+          args: MyProfileRouteArgs(
+            key: key,
+            userId: userId,
+            name: name,
+          ),
         );
 
   static const String name = 'MyProfileRoute';
+}
+
+class MyProfileRouteArgs {
+  const MyProfileRouteArgs({
+    this.key,
+    required this.userId,
+    required this.name,
+  });
+
+  final _i22.Key? key;
+
+  final String userId;
+
+  final String name;
+
+  @override
+  String toString() {
+    return 'MyProfileRouteArgs{key: $key, userId: $userId, name: $name}';
+  }
 }
 
 /// generated route for
@@ -451,12 +486,16 @@ class VolunteerLoginRoute extends _i21.PageRouteInfo<VolunteerLoginRouteArgs> {
   VolunteerLoginRoute({
     _i22.Key? key,
     required String userType,
+    bool? showAnalytics = false,
+    required String labelUser,
   }) : super(
           VolunteerLoginRoute.name,
           path: '/volunteer-login-view',
           args: VolunteerLoginRouteArgs(
             key: key,
             userType: userType,
+            showAnalytics: showAnalytics,
+            labelUser: labelUser,
           ),
         );
 
@@ -467,15 +506,21 @@ class VolunteerLoginRouteArgs {
   const VolunteerLoginRouteArgs({
     this.key,
     required this.userType,
+    this.showAnalytics = false,
+    required this.labelUser,
   });
 
   final _i22.Key? key;
 
   final String userType;
 
+  final bool? showAnalytics;
+
+  final String labelUser;
+
   @override
   String toString() {
-    return 'VolunteerLoginRouteArgs{key: $key, userType: $userType}';
+    return 'VolunteerLoginRouteArgs{key: $key, userType: $userType, showAnalytics: $showAnalytics, labelUser: $labelUser}';
   }
 }
 
@@ -486,12 +531,14 @@ class VolunteerSignUpRoute
   VolunteerSignUpRoute({
     _i22.Key? key,
     required String userType,
+    required String labelUser,
   }) : super(
           VolunteerSignUpRoute.name,
           path: '/volunteer-sign-up-view',
           args: VolunteerSignUpRouteArgs(
             key: key,
             userType: userType,
+            labelUser: labelUser,
           ),
         );
 
@@ -502,15 +549,18 @@ class VolunteerSignUpRouteArgs {
   const VolunteerSignUpRouteArgs({
     this.key,
     required this.userType,
+    required this.labelUser,
   });
 
   final _i22.Key? key;
 
   final String userType;
 
+  final String labelUser;
+
   @override
   String toString() {
-    return 'VolunteerSignUpRouteArgs{key: $key, userType: $userType}';
+    return 'VolunteerSignUpRouteArgs{key: $key, userType: $userType, labelUser: $labelUser}';
   }
 }
 

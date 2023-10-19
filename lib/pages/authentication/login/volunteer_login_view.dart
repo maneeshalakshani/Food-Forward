@@ -11,8 +11,12 @@ class VolunteerLoginView extends HookWidget {
   VolunteerLoginView({
     Key? key, 
     required this.userType,
+    this.showAnalytics = false,
+    required this.labelUser,
   }) : super(key: key);
   final String userType;
+  final bool? showAnalytics;
+  final String labelUser;
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -37,9 +41,9 @@ class VolunteerLoginView extends HookWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                const Text(
-                  "Login",
-                  style: TextStyle(
+                Text(
+                  "$labelUser Login",
+                  style: const TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
                   ),
@@ -88,7 +92,7 @@ class VolunteerLoginView extends HookWidget {
                             password: passwordController.text, 
                             userType: userType, 
                             context: context, 
-                            route: const DonorFoodListRoute()
+                            route: showAnalytics == true ? const ProfileRoute() : const DonorFoodListRoute()
                           )
                         : Authentications().loginWithEmailAndPassword(
                             email: emailController.text, 
@@ -99,11 +103,13 @@ class VolunteerLoginView extends HookWidget {
                           );
                   },
                 ),
-                AuthenticateNavigator(
-                  text: "Don't have an account?", 
-                  linkText: "Sign Up",
-                  route: VolunteerSignUpRoute(userType: userType),
-                ),
+                showAnalytics == false
+                  ? AuthenticateNavigator(
+                      text: "Don't have an account?", 
+                      linkText: "Sign Up",
+                      route: VolunteerSignUpRoute(userType: userType, labelUser: labelUser),
+                    )
+                  : const SizedBox(),
               ],
             ),
           ),

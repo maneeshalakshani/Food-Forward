@@ -4,6 +4,7 @@ import 'package:food_forward/pages/Components/appbar.dart';
 import 'package:food_forward/pages/Components/sideNav.dart';
 import 'package:food_forward/pages/Components/squareButton.dart';
 import 'package:food_forward/routes/routes.gr.dart';
+import 'package:food_forward/services/authentication.dart';
 import 'package:food_forward/services/recipient/recipientSerices.dart';
 import 'CartCard.dart';
 
@@ -55,7 +56,7 @@ class _CartViewState extends State<CartView> {
             SquareButton(
               onPressed: (){
                 RecipientFunction().createOrder(
-                  userId: "aerg", 
+                  userId: Authentications().getCurrentUserId(), 
                   cartItems: widget.cart.items, 
                   context: context, 
                   route: OrderConfirmRoute(orderNo: "afc7687JJe3"),

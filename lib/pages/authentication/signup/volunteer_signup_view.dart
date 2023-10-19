@@ -11,8 +11,10 @@ class VolunteerSignUpView extends HookWidget {
   VolunteerSignUpView({
     Key? key,
     required this.userType,
+    required this.labelUser,
   }) : super(key: key);
   final String userType;
+  final String labelUser;
 
   final ValueNotifier<String> deliveryPreference = ValueNotifier<String>('veg');
 
@@ -219,7 +221,7 @@ class VolunteerSignUpView extends HookWidget {
                 AuthenticateNavigator(
                   text: "Already have an account?",
                   linkText: "Login",
-                  route: VolunteerLoginRoute(userType: userType),
+                  route: VolunteerLoginRoute(userType: userType, labelUser: labelUser),
                 ),
               ],
             ),

@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserUtilities{
-  getAllFoodWithUserId() {
+  getAllFoodWithUserId({required String userId}) {
     return FirebaseFirestore.instance
       .collection("Foods")
-      .where('userId', isEqualTo: 'er242dYU');
+      .where('userId', isEqualTo: userId);
   }
 
   getAllFood() {
@@ -12,8 +12,8 @@ class UserUtilities{
       .collection("Foods");
   }
 
-  Future<int> getNumberOfItems() async {
-    QuerySnapshot querySnapshot = await getAllFoodWithUserId().get();
+  Future<int> getNumberOfItems({required String userId}) async {
+    QuerySnapshot querySnapshot = await getAllFoodWithUserId(userId: userId).get();
     int itemCount = querySnapshot.size;
     return itemCount;
   }
@@ -25,8 +25,8 @@ class UserUtilities{
   }
 
 
-  Future<double> getTotalDonation() async {
-    final userDonations = await getNumberOfItems();
+  Future<double> getTotalDonation({required String userId}) async {
+    final userDonations = await getNumberOfItems(userId: userId);
     final allDonations = await getAllDonations();
     
     if (allDonations == 0) {
@@ -37,8 +37,8 @@ class UserUtilities{
   }
 
 
-  Future<double> getTotalEnvironmentalImpactForUser() async {
-    final QuerySnapshot querySnapshot = await getAllFoodWithUserId().get();
+  Future<double> getTotalEnvironmentalImpactForUser({required String userId}) async {
+    final QuerySnapshot querySnapshot = await getAllFoodWithUserId(userId: userId).get();
     double totalEnvironmentalImpact = 0.0;
 
     for (QueryDocumentSnapshot document in querySnapshot.docs) {
@@ -67,8 +67,8 @@ class UserUtilities{
     return totalEnvironmentalImpact.toDouble();
   }
 
-  Future<double> calculateEnvironmentalImpactRatio() async {
-    final totalEnvironmentalImpactForUser = await getTotalEnvironmentalImpactForUser();
+  Future<double> calculateEnvironmentalImpactRatio({required String userId}) async {
+    final totalEnvironmentalImpactForUser = await getTotalEnvironmentalImpactForUser(userId: userId);
     final totalEnvironmentalImpactForAllFoods = await getTotalEnvironmentalImpactForAllFoods();
 
     if (totalEnvironmentalImpactForAllFoods == 0) {
