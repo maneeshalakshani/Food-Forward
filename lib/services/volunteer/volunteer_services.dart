@@ -93,7 +93,7 @@ class VolunteerFunctions {
       FirebaseFirestore.instance
           .runTransaction((Transaction transaction) async {
         await FirebaseFirestore.instance
-            .collection(fireStoreCollectionName)
+            .collection(discountFireStoreCollectionName)
             .doc()
             .set(discount.toJson());
       });

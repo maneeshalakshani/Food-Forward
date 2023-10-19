@@ -112,7 +112,7 @@ class VolunteerRewardView extends HookWidget {
                     return Text('Error ${snapshot.error}');
                   }
                   if (snapshot.hasData) {
-                    return buildList(context, snapshot.data?.docs);
+                    return buildList(context, snapshot.data?.docs, store);
                   }
                   return const Text("Loading...");
                 },
@@ -124,7 +124,10 @@ class VolunteerRewardView extends HookWidget {
     );
   }
 
-  Widget buildList(BuildContext context, List<DocumentSnapshot>? snapshot) {
+  Widget buildList(BuildContext context, List<DocumentSnapshot>? snapshot, RewardStore store) {
+    for(int i=0; i<(snapshot == null ? 0 : snapshot.length); i++){
+      addDiscount(userId: store.userId!, title: store.title, data: snapshot![i]);
+    }
     return ListView.builder(
       itemCount: snapshot!.length,
       itemBuilder: (context, int index) {
