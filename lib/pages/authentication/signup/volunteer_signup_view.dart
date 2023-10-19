@@ -150,7 +150,7 @@ class VolunteerSignUpView extends HookWidget {
                     )
                   : const SizedBox(),
                 CustomeTextField(
-                  label: "Password",
+                  label: "Password (at least 6 characters)",
                   prefixIcon: Icons.password,
                   controller: passwordController,
                 ),
