@@ -39,6 +39,7 @@ class TipsView extends HookWidget {
                       imageURL: LOGO_URL, 
                       tipLabel: tipsList[i].tipTitle,
                       tipID: i,
+                      tipItem: tipsList[i],
                     );
                   }, 
                   separatorBuilder: (context, i) => const SizedBox(height: 20,)),

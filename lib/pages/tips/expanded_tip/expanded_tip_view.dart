@@ -10,8 +10,10 @@ class ExpandedTipView extends HookWidget {
   const ExpandedTipView({
     Key? key, 
     required this.tipID,
+    required this.tipItem,
   }) : super(key: key);
   final int tipID;
+  final TipItem tipItem;
 
 
   @override
@@ -47,11 +49,11 @@ class ExpandedTipView extends HookWidget {
               SizedBox(
                 height: height/10 * 7.1,
                 child: ListView.separated(
-                  itemCount: 5,
+                  itemCount: tipItem.steps.length,
                   itemBuilder: (context, i){
                     return TipDetailedCard(
                       tipNumber: i, 
-                      text: "sdge awjf wyfw fkwyf wfyakf aegfaieg aegbiaeugiuaerg aeiugaieug aeguaeilughaer gaeurghea",
+                      text: tipItem.steps[i],
                     );
                   }, 
                   separatorBuilder: (context, i) => const SizedBox(height: 20,)),

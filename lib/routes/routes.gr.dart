@@ -14,8 +14,8 @@
 import 'package:auto_route/auto_route.dart' as _i21;
 import 'package:flutter/material.dart' as _i22;
 
-import '../models/Cart.dart' as _i24;
-import '../models/Food.dart' as _i25;
+import '../models/Cart.dart' as _i25;
+import '../models/Food.dart' as _i26;
 import '../pages/authentication/login/volunteer_login_view.dart' as _i8;
 import '../pages/authentication/signup/volunteer_signup_view.dart' as _i9;
 import '../pages/donor/add_food/add_food_view.dart' as _i18;
@@ -30,9 +30,10 @@ import '../pages/recipient/cart/order_confirmation/order_confirmation_view.dart'
 import '../pages/recipient/explorer/explorer_view.dart' as _i14;
 import '../pages/recipient/my_orders/my_orders_view.dart' as _i20;
 import '../pages/stats/my_stats_view.dart' as _i4;
-import '../pages/stats/specified_stat_view/pieChartData.dart' as _i23;
+import '../pages/stats/specified_stat_view/pieChartData.dart' as _i24;
 import '../pages/stats/specified_stat_view/specified_stat_view.dart' as _i7;
 import '../pages/tips/expanded_tip/expanded_tip_view.dart' as _i6;
+import '../pages/tips/tips_list.dart' as _i23;
 import '../pages/tips/tips_view.dart' as _i5;
 import '../pages/volunteer/my_profile/my_profile.dart' as _i10;
 import '../pages/volunteer/my_tasks/complete_task/complete_task_view.dart'
@@ -83,6 +84,7 @@ class AppRouter extends _i21.RootStackRouter {
         child: _i6.ExpandedTipView(
           key: args.key,
           tipID: args.tipID,
+          tipItem: args.tipItem,
         ),
       );
     },
@@ -351,12 +353,14 @@ class ExpandedTipRoute extends _i21.PageRouteInfo<ExpandedTipRouteArgs> {
   ExpandedTipRoute({
     _i22.Key? key,
     required int tipID,
+    required _i23.TipItem tipItem,
   }) : super(
           ExpandedTipRoute.name,
           path: '/expandedTips',
           args: ExpandedTipRouteArgs(
             key: key,
             tipID: tipID,
+            tipItem: tipItem,
           ),
         );
 
@@ -367,15 +371,18 @@ class ExpandedTipRouteArgs {
   const ExpandedTipRouteArgs({
     this.key,
     required this.tipID,
+    required this.tipItem,
   });
 
   final _i22.Key? key;
 
   final int tipID;
 
+  final _i23.TipItem tipItem;
+
   @override
   String toString() {
-    return 'ExpandedTipRouteArgs{key: $key, tipID: $tipID}';
+    return 'ExpandedTipRouteArgs{key: $key, tipID: $tipID, tipItem: $tipItem}';
   }
 }
 
@@ -385,7 +392,7 @@ class SpecifiedStatRoute extends _i21.PageRouteInfo<SpecifiedStatRouteArgs> {
   SpecifiedStatRoute({
     _i22.Key? key,
     required String title,
-    required List<_i23.PieChartListData> dataList,
+    required List<_i24.PieChartListData> dataList,
     required String heroWord,
     required String text,
     _i22.Color? heroWordColor,
@@ -422,7 +429,7 @@ class SpecifiedStatRouteArgs {
 
   final String title;
 
-  final List<_i23.PieChartListData> dataList;
+  final List<_i24.PieChartListData> dataList;
 
   final String heroWord;
 
@@ -570,7 +577,7 @@ class ExplorerRoute extends _i21.PageRouteInfo<void> {
 /// generated route for
 /// [_i15.CartView]
 class CartRoute extends _i21.PageRouteInfo<CartRouteArgs> {
-  CartRoute({required _i24.Cart cart})
+  CartRoute({required _i25.Cart cart})
       : super(
           CartRoute.name,
           path: '/cart-view',
@@ -583,7 +590,7 @@ class CartRoute extends _i21.PageRouteInfo<CartRouteArgs> {
 class CartRouteArgs {
   const CartRouteArgs({required this.cart});
 
-  final _i24.Cart cart;
+  final _i25.Cart cart;
 
   @override
   String toString() {
@@ -667,7 +674,7 @@ class DonorUpdateFoodRoute
     extends _i21.PageRouteInfo<DonorUpdateFoodRouteArgs> {
   DonorUpdateFoodRoute({
     _i22.Key? key,
-    required _i25.Food food,
+    required _i26.Food food,
   }) : super(
           DonorUpdateFoodRoute.name,
           path: '/donor-update-food-view',
@@ -688,7 +695,7 @@ class DonorUpdateFoodRouteArgs {
 
   final _i22.Key? key;
 
-  final _i25.Food food;
+  final _i26.Food food;
 
   @override
   String toString() {

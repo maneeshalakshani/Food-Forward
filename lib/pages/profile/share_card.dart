@@ -1,19 +1,22 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:food_forward/const.dart';
+import 'package:food_forward/models/Badge.dart';
 
 class ShareCard extends HookWidget {
   const ShareCard({
     Key? key, 
-    required this.imageURL,
-    required this.text,
+    required this.context,
+    required this.data,
   }) : super(key: key);
-  final String imageURL;
-  final String text;
+  final BuildContext context;
+  final DocumentSnapshot data;
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    final badge = BadgeClass.fromSnapshot(data);
 
    return Container(
     color: LIGHT_PINK,
@@ -29,7 +32,7 @@ class ShareCard extends HookWidget {
                 width: width / 3 * 0.8,
                 child: Center(
                   child: Image.asset(
-                    imageURL,
+                    badge.imageUrl,
                     height: 70,
                   ),
                 ),
@@ -38,7 +41,7 @@ class ShareCard extends HookWidget {
                 margin: const EdgeInsets.symmetric(vertical: 10),
                 padding: const EdgeInsets.only(right: 15),
                 width: width/3 * 1.9,
-                child: Text(text),
+                child: Text(badge.description),
               )
             ],
           ),
