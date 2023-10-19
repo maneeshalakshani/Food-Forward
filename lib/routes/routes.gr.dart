@@ -11,11 +11,11 @@
 // ignore_for_file: type=lint
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i21;
-import 'package:flutter/material.dart' as _i22;
+import 'package:auto_route/auto_route.dart' as _i22;
+import 'package:flutter/material.dart' as _i23;
 
-import '../models/Cart.dart' as _i25;
-import '../models/Food.dart' as _i26;
+import '../models/Cart.dart' as _i26;
+import '../models/Food.dart' as _i27;
 import '../pages/authentication/login/volunteer_login_view.dart' as _i8;
 import '../pages/authentication/signup/volunteer_signup_view.dart' as _i9;
 import '../pages/donor/add_food/add_food_view.dart' as _i18;
@@ -30,38 +30,39 @@ import '../pages/recipient/cart/order_confirmation/order_confirmation_view.dart'
 import '../pages/recipient/explorer/explorer_view.dart' as _i14;
 import '../pages/recipient/my_orders/my_orders_view.dart' as _i20;
 import '../pages/stats/my_stats_view.dart' as _i4;
-import '../pages/stats/specified_stat_view/pieChartData.dart' as _i24;
+import '../pages/stats/specified_stat_view/pieChartData.dart' as _i25;
 import '../pages/stats/specified_stat_view/specified_stat_view.dart' as _i7;
 import '../pages/tips/expanded_tip/expanded_tip_view.dart' as _i6;
-import '../pages/tips/tips_list.dart' as _i23;
+import '../pages/tips/tips_list.dart' as _i24;
 import '../pages/tips/tips_view.dart' as _i5;
 import '../pages/volunteer/my_profile/my_profile.dart' as _i10;
 import '../pages/volunteer/my_tasks/complete_task/complete_task_view.dart'
     as _i13;
 import '../pages/volunteer/my_tasks/my_tasks_view.dart' as _i12;
 import '../pages/volunteer/notifications/my_notifications_view.dart' as _i11;
+import '../pages/volunteer/rewards/rewards_view.dart' as _i21;
 
-class AppRouter extends _i21.RootStackRouter {
-  AppRouter([_i22.GlobalKey<_i22.NavigatorState>? navigatorKey])
+class AppRouter extends _i22.RootStackRouter {
+  AppRouter([_i23.GlobalKey<_i23.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
-  final Map<String, _i21.PageFactory> pagesMap = {
+  final Map<String, _i22.PageFactory> pagesMap = {
     MenuRoute.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i1.MenuView(),
       );
     },
     ProfileRoute.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i2.ProfileView(),
       );
     },
     MyProfileRoute.name: (routeData) {
       final args = routeData.argsAs<MyProfileRouteArgs>();
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i3.MyProfileView(
           key: args.key,
@@ -71,20 +72,20 @@ class AppRouter extends _i21.RootStackRouter {
       );
     },
     MyStatsRoute.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i4.MyStatsView(),
       );
     },
     TipsRoute.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i5.TipsView(),
       );
     },
     ExpandedTipRoute.name: (routeData) {
       final args = routeData.argsAs<ExpandedTipRouteArgs>();
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i6.ExpandedTipView(
           key: args.key,
@@ -95,7 +96,7 @@ class AppRouter extends _i21.RootStackRouter {
     },
     SpecifiedStatRoute.name: (routeData) {
       final args = routeData.argsAs<SpecifiedStatRouteArgs>();
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i7.SpecifiedStatView(
           key: args.key,
@@ -110,7 +111,7 @@ class AppRouter extends _i21.RootStackRouter {
     },
     VolunteerLoginRoute.name: (routeData) {
       final args = routeData.argsAs<VolunteerLoginRouteArgs>();
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i8.VolunteerLoginView(
           key: args.key,
@@ -122,7 +123,7 @@ class AppRouter extends _i21.RootStackRouter {
     },
     VolunteerSignUpRoute.name: (routeData) {
       final args = routeData.argsAs<VolunteerSignUpRouteArgs>();
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i9.VolunteerSignUpView(
           key: args.key,
@@ -132,45 +133,45 @@ class AppRouter extends _i21.RootStackRouter {
       );
     },
     VolunteerProfileRoute.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i10.VolunteerProfileView(),
       );
     },
     VolunteerNotificationsRoute.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i11.VolunteerNotificationsView(),
       );
     },
     VolunteerTaskRoute.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i12.VolunteerTaskView(),
       );
     },
     VolunteerCompleteTaskRoute.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i13.VolunteerCompleteTaskView(),
       );
     },
     ExplorerRoute.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i14.ExplorerView(),
       );
     },
     CartRoute.name: (routeData) {
       final args = routeData.argsAs<CartRouteArgs>();
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i15.CartView(cart: args.cart),
       );
     },
     OrderConfirmRoute.name: (routeData) {
       final args = routeData.argsAs<OrderConfirmRouteArgs>();
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i16.OrderConfirmView(
           key: args.key,
@@ -179,7 +180,7 @@ class AppRouter extends _i21.RootStackRouter {
       );
     },
     DonorFoodListRoute.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i17.DonorFoodListView(),
       );
@@ -187,14 +188,14 @@ class AppRouter extends _i21.RootStackRouter {
     DonorAddFoodRoute.name: (routeData) {
       final args = routeData.argsAs<DonorAddFoodRouteArgs>(
           orElse: () => const DonorAddFoodRouteArgs());
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i18.DonorAddFoodView(key: args.key),
       );
     },
     DonorUpdateFoodRoute.name: (routeData) {
       final args = routeData.argsAs<DonorUpdateFoodRouteArgs>();
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i19.DonorUpdateFoodView(
           key: args.key,
@@ -203,101 +204,111 @@ class AppRouter extends _i21.RootStackRouter {
       );
     },
     MyOrdersRoute.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i20.MyOrdersView(),
+      );
+    },
+    VolunteerRewardRoute.name: (routeData) {
+      return _i22.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i21.VolunteerRewardView(),
       );
     },
   };
 
   @override
-  List<_i21.RouteConfig> get routes => [
-        _i21.RouteConfig(
+  List<_i22.RouteConfig> get routes => [
+        _i22.RouteConfig(
           MenuRoute.name,
           path: '/',
         ),
-        _i21.RouteConfig(
+        _i22.RouteConfig(
           ProfileRoute.name,
           path: '/profile',
         ),
-        _i21.RouteConfig(
+        _i22.RouteConfig(
           MyProfileRoute.name,
           path: '/myProfile',
         ),
-        _i21.RouteConfig(
+        _i22.RouteConfig(
           MyStatsRoute.name,
           path: '/stats',
         ),
-        _i21.RouteConfig(
+        _i22.RouteConfig(
           TipsRoute.name,
           path: '/tips',
         ),
-        _i21.RouteConfig(
+        _i22.RouteConfig(
           ExpandedTipRoute.name,
           path: '/expandedTips',
         ),
-        _i21.RouteConfig(
+        _i22.RouteConfig(
           SpecifiedStatRoute.name,
           path: '/specifiedStat',
         ),
-        _i21.RouteConfig(
+        _i22.RouteConfig(
           VolunteerLoginRoute.name,
           path: '/volunteer-login-view',
         ),
-        _i21.RouteConfig(
+        _i22.RouteConfig(
           VolunteerSignUpRoute.name,
           path: '/volunteer-sign-up-view',
         ),
-        _i21.RouteConfig(
+        _i22.RouteConfig(
           VolunteerProfileRoute.name,
           path: '/volunteer-profile-view',
         ),
-        _i21.RouteConfig(
+        _i22.RouteConfig(
           VolunteerNotificationsRoute.name,
           path: '/volunteer-notifications-view',
         ),
-        _i21.RouteConfig(
+        _i22.RouteConfig(
           VolunteerTaskRoute.name,
           path: '/volunteer-task-view',
         ),
-        _i21.RouteConfig(
+        _i22.RouteConfig(
           VolunteerCompleteTaskRoute.name,
           path: '/volunteer-complete-task-view',
         ),
-        _i21.RouteConfig(
+        _i22.RouteConfig(
           ExplorerRoute.name,
           path: '/explorer-view',
         ),
-        _i21.RouteConfig(
+        _i22.RouteConfig(
           CartRoute.name,
           path: '/cart-view',
         ),
-        _i21.RouteConfig(
+        _i22.RouteConfig(
           OrderConfirmRoute.name,
           path: '/order-confirm-view',
         ),
-        _i21.RouteConfig(
+        _i22.RouteConfig(
           DonorFoodListRoute.name,
           path: '/donor-food-list-view',
         ),
-        _i21.RouteConfig(
+        _i22.RouteConfig(
           DonorAddFoodRoute.name,
           path: '/donor-add-food-view',
         ),
-        _i21.RouteConfig(
+        _i22.RouteConfig(
           DonorUpdateFoodRoute.name,
           path: '/donor-update-food-view',
         ),
-        _i21.RouteConfig(
+        _i22.RouteConfig(
           MyOrdersRoute.name,
           path: '/my-orders-view',
+        ),
+        _i22.RouteConfig(
+          VolunteerRewardRoute.name,
+          path: '/volunteer-reward-view',
         ),
       ];
 }
 
 /// generated route for
 /// [_i1.MenuView]
-class MenuRoute extends _i21.PageRouteInfo<void> {
+class MenuRoute extends _i22.PageRouteInfo<void> {
   const MenuRoute()
       : super(
           MenuRoute.name,
@@ -309,7 +320,7 @@ class MenuRoute extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.ProfileView]
-class ProfileRoute extends _i21.PageRouteInfo<void> {
+class ProfileRoute extends _i22.PageRouteInfo<void> {
   const ProfileRoute()
       : super(
           ProfileRoute.name,
@@ -321,9 +332,9 @@ class ProfileRoute extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.MyProfileView]
-class MyProfileRoute extends _i21.PageRouteInfo<MyProfileRouteArgs> {
+class MyProfileRoute extends _i22.PageRouteInfo<MyProfileRouteArgs> {
   MyProfileRoute({
-    _i22.Key? key,
+    _i23.Key? key,
     required String userId,
     required String name,
   }) : super(
@@ -346,7 +357,7 @@ class MyProfileRouteArgs {
     required this.name,
   });
 
-  final _i22.Key? key;
+  final _i23.Key? key;
 
   final String userId;
 
@@ -360,7 +371,7 @@ class MyProfileRouteArgs {
 
 /// generated route for
 /// [_i4.MyStatsView]
-class MyStatsRoute extends _i21.PageRouteInfo<void> {
+class MyStatsRoute extends _i22.PageRouteInfo<void> {
   const MyStatsRoute()
       : super(
           MyStatsRoute.name,
@@ -372,7 +383,7 @@ class MyStatsRoute extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.TipsView]
-class TipsRoute extends _i21.PageRouteInfo<void> {
+class TipsRoute extends _i22.PageRouteInfo<void> {
   const TipsRoute()
       : super(
           TipsRoute.name,
@@ -384,11 +395,11 @@ class TipsRoute extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.ExpandedTipView]
-class ExpandedTipRoute extends _i21.PageRouteInfo<ExpandedTipRouteArgs> {
+class ExpandedTipRoute extends _i22.PageRouteInfo<ExpandedTipRouteArgs> {
   ExpandedTipRoute({
-    _i22.Key? key,
+    _i23.Key? key,
     required int tipID,
-    required _i23.TipItem tipItem,
+    required _i24.TipItem tipItem,
   }) : super(
           ExpandedTipRoute.name,
           path: '/expandedTips',
@@ -409,11 +420,11 @@ class ExpandedTipRouteArgs {
     required this.tipItem,
   });
 
-  final _i22.Key? key;
+  final _i23.Key? key;
 
   final int tipID;
 
-  final _i23.TipItem tipItem;
+  final _i24.TipItem tipItem;
 
   @override
   String toString() {
@@ -423,14 +434,14 @@ class ExpandedTipRouteArgs {
 
 /// generated route for
 /// [_i7.SpecifiedStatView]
-class SpecifiedStatRoute extends _i21.PageRouteInfo<SpecifiedStatRouteArgs> {
+class SpecifiedStatRoute extends _i22.PageRouteInfo<SpecifiedStatRouteArgs> {
   SpecifiedStatRoute({
-    _i22.Key? key,
+    _i23.Key? key,
     required String title,
-    required List<_i24.PieChartListData> dataList,
+    required List<_i25.PieChartListData> dataList,
     required String heroWord,
     required String text,
-    _i22.Color? heroWordColor,
+    _i23.Color? heroWordColor,
     required double percentage,
   }) : super(
           SpecifiedStatRoute.name,
@@ -460,17 +471,17 @@ class SpecifiedStatRouteArgs {
     required this.percentage,
   });
 
-  final _i22.Key? key;
+  final _i23.Key? key;
 
   final String title;
 
-  final List<_i24.PieChartListData> dataList;
+  final List<_i25.PieChartListData> dataList;
 
   final String heroWord;
 
   final String text;
 
-  final _i22.Color? heroWordColor;
+  final _i23.Color? heroWordColor;
 
   final double percentage;
 
@@ -482,9 +493,9 @@ class SpecifiedStatRouteArgs {
 
 /// generated route for
 /// [_i8.VolunteerLoginView]
-class VolunteerLoginRoute extends _i21.PageRouteInfo<VolunteerLoginRouteArgs> {
+class VolunteerLoginRoute extends _i22.PageRouteInfo<VolunteerLoginRouteArgs> {
   VolunteerLoginRoute({
-    _i22.Key? key,
+    _i23.Key? key,
     required String userType,
     bool? showAnalytics = false,
     required String labelUser,
@@ -510,7 +521,7 @@ class VolunteerLoginRouteArgs {
     required this.labelUser,
   });
 
-  final _i22.Key? key;
+  final _i23.Key? key;
 
   final String userType;
 
@@ -527,9 +538,9 @@ class VolunteerLoginRouteArgs {
 /// generated route for
 /// [_i9.VolunteerSignUpView]
 class VolunteerSignUpRoute
-    extends _i21.PageRouteInfo<VolunteerSignUpRouteArgs> {
+    extends _i22.PageRouteInfo<VolunteerSignUpRouteArgs> {
   VolunteerSignUpRoute({
-    _i22.Key? key,
+    _i23.Key? key,
     required String userType,
     required String labelUser,
   }) : super(
@@ -552,7 +563,7 @@ class VolunteerSignUpRouteArgs {
     required this.labelUser,
   });
 
-  final _i22.Key? key;
+  final _i23.Key? key;
 
   final String userType;
 
@@ -566,7 +577,7 @@ class VolunteerSignUpRouteArgs {
 
 /// generated route for
 /// [_i10.VolunteerProfileView]
-class VolunteerProfileRoute extends _i21.PageRouteInfo<void> {
+class VolunteerProfileRoute extends _i22.PageRouteInfo<void> {
   const VolunteerProfileRoute()
       : super(
           VolunteerProfileRoute.name,
@@ -578,7 +589,7 @@ class VolunteerProfileRoute extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i11.VolunteerNotificationsView]
-class VolunteerNotificationsRoute extends _i21.PageRouteInfo<void> {
+class VolunteerNotificationsRoute extends _i22.PageRouteInfo<void> {
   const VolunteerNotificationsRoute()
       : super(
           VolunteerNotificationsRoute.name,
@@ -590,7 +601,7 @@ class VolunteerNotificationsRoute extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i12.VolunteerTaskView]
-class VolunteerTaskRoute extends _i21.PageRouteInfo<void> {
+class VolunteerTaskRoute extends _i22.PageRouteInfo<void> {
   const VolunteerTaskRoute()
       : super(
           VolunteerTaskRoute.name,
@@ -602,7 +613,7 @@ class VolunteerTaskRoute extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i13.VolunteerCompleteTaskView]
-class VolunteerCompleteTaskRoute extends _i21.PageRouteInfo<void> {
+class VolunteerCompleteTaskRoute extends _i22.PageRouteInfo<void> {
   const VolunteerCompleteTaskRoute()
       : super(
           VolunteerCompleteTaskRoute.name,
@@ -614,7 +625,7 @@ class VolunteerCompleteTaskRoute extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i14.ExplorerView]
-class ExplorerRoute extends _i21.PageRouteInfo<void> {
+class ExplorerRoute extends _i22.PageRouteInfo<void> {
   const ExplorerRoute()
       : super(
           ExplorerRoute.name,
@@ -626,8 +637,8 @@ class ExplorerRoute extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i15.CartView]
-class CartRoute extends _i21.PageRouteInfo<CartRouteArgs> {
-  CartRoute({required _i25.Cart cart})
+class CartRoute extends _i22.PageRouteInfo<CartRouteArgs> {
+  CartRoute({required _i26.Cart cart})
       : super(
           CartRoute.name,
           path: '/cart-view',
@@ -640,7 +651,7 @@ class CartRoute extends _i21.PageRouteInfo<CartRouteArgs> {
 class CartRouteArgs {
   const CartRouteArgs({required this.cart});
 
-  final _i25.Cart cart;
+  final _i26.Cart cart;
 
   @override
   String toString() {
@@ -650,9 +661,9 @@ class CartRouteArgs {
 
 /// generated route for
 /// [_i16.OrderConfirmView]
-class OrderConfirmRoute extends _i21.PageRouteInfo<OrderConfirmRouteArgs> {
+class OrderConfirmRoute extends _i22.PageRouteInfo<OrderConfirmRouteArgs> {
   OrderConfirmRoute({
-    _i22.Key? key,
+    _i23.Key? key,
     required String orderNo,
   }) : super(
           OrderConfirmRoute.name,
@@ -672,7 +683,7 @@ class OrderConfirmRouteArgs {
     required this.orderNo,
   });
 
-  final _i22.Key? key;
+  final _i23.Key? key;
 
   final String orderNo;
 
@@ -684,7 +695,7 @@ class OrderConfirmRouteArgs {
 
 /// generated route for
 /// [_i17.DonorFoodListView]
-class DonorFoodListRoute extends _i21.PageRouteInfo<void> {
+class DonorFoodListRoute extends _i22.PageRouteInfo<void> {
   const DonorFoodListRoute()
       : super(
           DonorFoodListRoute.name,
@@ -696,8 +707,8 @@ class DonorFoodListRoute extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i18.DonorAddFoodView]
-class DonorAddFoodRoute extends _i21.PageRouteInfo<DonorAddFoodRouteArgs> {
-  DonorAddFoodRoute({_i22.Key? key})
+class DonorAddFoodRoute extends _i22.PageRouteInfo<DonorAddFoodRouteArgs> {
+  DonorAddFoodRoute({_i23.Key? key})
       : super(
           DonorAddFoodRoute.name,
           path: '/donor-add-food-view',
@@ -710,7 +721,7 @@ class DonorAddFoodRoute extends _i21.PageRouteInfo<DonorAddFoodRouteArgs> {
 class DonorAddFoodRouteArgs {
   const DonorAddFoodRouteArgs({this.key});
 
-  final _i22.Key? key;
+  final _i23.Key? key;
 
   @override
   String toString() {
@@ -721,10 +732,10 @@ class DonorAddFoodRouteArgs {
 /// generated route for
 /// [_i19.DonorUpdateFoodView]
 class DonorUpdateFoodRoute
-    extends _i21.PageRouteInfo<DonorUpdateFoodRouteArgs> {
+    extends _i22.PageRouteInfo<DonorUpdateFoodRouteArgs> {
   DonorUpdateFoodRoute({
-    _i22.Key? key,
-    required _i26.Food food,
+    _i23.Key? key,
+    required _i27.Food food,
   }) : super(
           DonorUpdateFoodRoute.name,
           path: '/donor-update-food-view',
@@ -743,9 +754,9 @@ class DonorUpdateFoodRouteArgs {
     required this.food,
   });
 
-  final _i22.Key? key;
+  final _i23.Key? key;
 
-  final _i26.Food food;
+  final _i27.Food food;
 
   @override
   String toString() {
@@ -755,7 +766,7 @@ class DonorUpdateFoodRouteArgs {
 
 /// generated route for
 /// [_i20.MyOrdersView]
-class MyOrdersRoute extends _i21.PageRouteInfo<void> {
+class MyOrdersRoute extends _i22.PageRouteInfo<void> {
   const MyOrdersRoute()
       : super(
           MyOrdersRoute.name,
@@ -763,4 +774,16 @@ class MyOrdersRoute extends _i21.PageRouteInfo<void> {
         );
 
   static const String name = 'MyOrdersRoute';
+}
+
+/// generated route for
+/// [_i21.VolunteerRewardView]
+class VolunteerRewardRoute extends _i22.PageRouteInfo<void> {
+  const VolunteerRewardRoute()
+      : super(
+          VolunteerRewardRoute.name,
+          path: '/volunteer-reward-view',
+        );
+
+  static const String name = 'VolunteerRewardRoute';
 }

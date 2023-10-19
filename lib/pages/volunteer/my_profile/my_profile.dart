@@ -110,10 +110,8 @@ class VolunteerProfileView extends HookWidget {
                 btnMargin: const EdgeInsets.symmetric(vertical: 0),
               ),
               SquareButton(
-                onPressed: (){
-                  Authentications().logout();
-                }, 
-                text: "Logout"
+                onPressed: () => context.router.push(const VolunteerRewardRoute()), 
+                text: "Rewards"
               ),
             ],
           ),

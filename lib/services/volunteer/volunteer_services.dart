@@ -1,17 +1,34 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:food_forward/models/Discount.dart';
 import 'package:food_forward/models/MyTask.dart';
 import 'package:food_forward/models/Order.dart';
 import 'package:food_forward/services/recipient/recipientSerices.dart';
 
 class VolunteerFunctions {
   String fireStoreCollectionName = "MyTasks";
+  String discountFireStoreCollectionName = "Discounts";
 
   getAllMyTasks() {
     return FirebaseFirestore.instance
         .collection(fireStoreCollectionName)
         .where('taskStatus', isEqualTo: 'Pending')
+        .snapshots();
+  }
+
+  getAllCompletedTasksWithUser({required String userId}) {
+    return FirebaseFirestore.instance
+        .collection(fireStoreCollectionName)
+        .where('userId', isEqualTo: userId)
+        .where('taskStatus', isEqualTo: 'Completed')
+        .get();
+  }
+
+  getAllDiscountsById({required String userId}) {
+    return FirebaseFirestore.instance
+        .collection(discountFireStoreCollectionName)
+        .where('userId', isEqualTo: userId)
         .snapshots();
   }
 
@@ -51,6 +68,34 @@ class VolunteerFunctions {
           context: context, 
           route: null
         );
+      });
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  createDiscount(
+      {required String code,
+      required double value,
+      required String foodId,
+      required String foodName,
+      required String price,
+  }) async {
+
+    Discount discount = Discount(
+      code: code, 
+      value: value, 
+      foodId: foodId, 
+      foodName: foodName,
+      price: price,
+    );
+    try {
+      FirebaseFirestore.instance
+          .runTransaction((Transaction transaction) async {
+        await FirebaseFirestore.instance
+            .collection(fireStoreCollectionName)
+            .doc()
+            .set(discount.toJson());
       });
     } catch (e) {
       print(e.toString());

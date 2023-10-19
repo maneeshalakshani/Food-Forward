@@ -19,6 +19,7 @@ import 'package:food_forward/pages/volunteer/my_profile/my_profile.dart';
 import 'package:food_forward/pages/volunteer/my_tasks/complete_task/complete_task_view.dart';
 import 'package:food_forward/pages/volunteer/my_tasks/my_tasks_view.dart';
 import 'package:food_forward/pages/volunteer/notifications/my_notifications_view.dart';
+import 'package:food_forward/pages/volunteer/rewards/rewards_view.dart';
 
 /// Need to run the following command
 ///    flutter packages pub run build_runner watch --delete-conflicting-outputs
@@ -46,6 +47,7 @@ import 'package:food_forward/pages/volunteer/notifications/my_notifications_view
     MaterialRoute(page: DonorAddFoodView),
     MaterialRoute(page: DonorUpdateFoodView),
     MaterialRoute(page: MyOrdersView),
+    MaterialRoute(page: VolunteerRewardView),
   ],
 )
 class $AppRouter {}
