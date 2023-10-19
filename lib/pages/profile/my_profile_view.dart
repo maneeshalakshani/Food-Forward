@@ -185,7 +185,7 @@ class MyProfileView extends HookWidget {
                 ? "Red Badge: You're a sustainability hero, significantly reducing CO2 emissions through your actions!"
                 : "Red Badge: You're a food donation champion, making a big impact on reducing food waste!", 
             userId: userId, 
-            imageUrl: "assets/logo.png"
+            imageUrl: "assets/red.png"
           );          
         }
         
@@ -199,7 +199,7 @@ class MyProfileView extends HookWidget {
                 ? "Orange Badge: You're making a greener planet with your eco-friendly contributions. Great job!"
                 : "Orange Badge: Your consistent food donations are helping those in need. Keep it up!", 
             userId: userId, 
-            imageUrl: "assets/logo.png"
+            imageUrl: "assets/orr.png"
           );    
         }
         
@@ -213,7 +213,7 @@ class MyProfileView extends HookWidget {
                 ? "Yellow Badge: Acknowledged for your efforts in reducing CO2 emissions through your food donations."
                 : "Yellow Badge: Recognized for your generosity in donating food items. Your efforts are truly appreciated!", 
             userId: userId, 
-            imageUrl: "assets/logo.png"
+            imageUrl: "assets/yell.png"
           );  
         }
       }

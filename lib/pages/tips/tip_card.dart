@@ -39,8 +39,12 @@ class TipCard extends HookWidget {
                 ),
               ),
               Container(
-                width: width/3 * 1.9,
-                child: Text(tipLabel)
+                width: width/3 * 1.7,
+                child: Text(
+                  tipLabel,
+                  maxLines: 10,
+                  overflow: TextOverflow.ellipsis,
+                )
               ),
             ],
           ),

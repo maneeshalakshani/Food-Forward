@@ -11,6 +11,6 @@ class ScrollItem{
 
 List<ScrollItem> horizontalScrollList = [
   ScrollItem(imageURL: LOGO_URL, name: "Stats", route: const MyStatsRoute()),
-  ScrollItem(imageURL: LOGO_URL, name: "Badges", route: const TipsRoute()),
+  ScrollItem(imageURL: "assets/red.png", name: "Badges", route: null),
   ScrollItem(imageURL: LOGO_URL, name: "Tips", route: const TipsRoute()),
 ];
