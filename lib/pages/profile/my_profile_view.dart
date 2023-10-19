@@ -13,14 +13,18 @@ import 'package:food_forward/services/user_services.dart';
 class MyProfileView extends HookWidget {
   const MyProfileView({
     Key? key, 
+    required this.userId,
+    required this.name,
   }) : super(key: key);
+  final String name;
+  final String userId;
 
 
   @override
   Widget build(BuildContext context) {
     // Call addBadges when the widget is built (page loads)
     useEffect(() {
-      addBadges(userId: "er242dYU");
+      addBadges(userId: userId);
       return null; // Return null to indicate no cleanup is needed
     }, []);
 
@@ -64,9 +68,9 @@ class MyProfileView extends HookWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      "MANEESHA LAKSHANI",
-                      style: TextStyle(
+                    Text(
+                      name,
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
@@ -124,7 +128,7 @@ class MyProfileView extends HookWidget {
           ),
           Expanded(
                 child: StreamBuilder<QuerySnapshot>(
-                  stream: BadgesFunction().getAllBadges(userId: "er242dYU"),
+                  stream: BadgesFunction().getAllBadges(userId: userId),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
                       return Text('Error ${snapshot.error}');
@@ -156,8 +160,8 @@ class MyProfileView extends HookWidget {
 
   getPercentage() async {
     UserUtilities userUtilities = UserUtilities();
-    double totDonations = await userUtilities.getTotalDonation();
-    double envImpact = await userUtilities.calculateEnvironmentalImpactRatio();
+    double totDonations = await userUtilities.getTotalDonation(userId: userId);
+    double envImpact = await userUtilities.calculateEnvironmentalImpactRatio(userId: userId);
     double comContributions = userUtilities.calculateCommunityContributionsPercentage(envImpact, totDonations);
     return [totDonations, envImpact, comContributions];
   }

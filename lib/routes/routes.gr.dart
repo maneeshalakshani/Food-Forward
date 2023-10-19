@@ -60,9 +60,14 @@ class AppRouter extends _i21.RootStackRouter {
       );
     },
     MyProfileRoute.name: (routeData) {
+      final args = routeData.argsAs<MyProfileRouteArgs>();
       return _i21.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i3.MyProfileView(),
+        child: _i3.MyProfileView(
+          key: args.key,
+          userId: args.userId,
+          name: args.name,
+        ),
       );
     },
     MyStatsRoute.name: (routeData) {
@@ -316,14 +321,41 @@ class ProfileRoute extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.MyProfileView]
-class MyProfileRoute extends _i21.PageRouteInfo<void> {
-  const MyProfileRoute()
-      : super(
+class MyProfileRoute extends _i21.PageRouteInfo<MyProfileRouteArgs> {
+  MyProfileRoute({
+    _i22.Key? key,
+    required String userId,
+    required String name,
+  }) : super(
           MyProfileRoute.name,
           path: '/myProfile',
+          args: MyProfileRouteArgs(
+            key: key,
+            userId: userId,
+            name: name,
+          ),
         );
 
   static const String name = 'MyProfileRoute';
+}
+
+class MyProfileRouteArgs {
+  const MyProfileRouteArgs({
+    this.key,
+    required this.userId,
+    required this.name,
+  });
+
+  final _i22.Key? key;
+
+  final String userId;
+
+  final String name;
+
+  @override
+  String toString() {
+    return 'MyProfileRouteArgs{key: $key, userId: $userId, name: $name}';
+  }
 }
 
 /// generated route for

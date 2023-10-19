@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:food_forward/pages/Components/appbar.dart';
+import 'package:food_forward/pages/Components/sideNav.dart';
 import 'package:food_forward/pages/volunteer/notifications/notification_card.dart';
 import 'package:food_forward/services/recipient/recipientSerices.dart';
 
@@ -16,6 +17,7 @@ class VolunteerNotificationsView extends HookWidget {
 
     return Scaffold(
       appBar: appBar(),
+      drawer: SideNav(),
       body: Container(
         width: width,
         padding: const EdgeInsets.symmetric(vertical: 30),

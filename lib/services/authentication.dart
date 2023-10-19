@@ -253,4 +253,33 @@ class Authentications{
     }
   }
 
+  Future<Map<String, dynamic>?> getCurrentUser() async {
+    // Check if a user is currently authenticated
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      print("User ID: ${user.uid}");
+
+      DocumentSnapshot userData = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .get();
+
+      if (userData.exists) {
+        Map<String, dynamic> userDataMap = userData.data() as Map<String, dynamic>;
+        // String name = userDataMap['name'];
+        // String email = userDataMap['email'];
+        
+        return userDataMap;
+      }
+    }
+    return null; // Return null if there is no authenticated user or user data is not found
+  }
+
+  getCurrentUserId(){
+    User? user = FirebaseAuth.instance.currentUser;
+    return user!.uid;
+  }
+
+
 }

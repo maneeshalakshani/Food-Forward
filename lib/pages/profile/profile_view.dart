@@ -5,6 +5,7 @@ import 'package:food_forward/pages/Components/appbar.dart';
 import 'package:food_forward/pages/Components/clickable_container.dart';
 import 'package:food_forward/pages/Components/sideNav.dart';
 import 'package:food_forward/routes/routes.gr.dart';
+import 'package:food_forward/services/authentication.dart';
 
 class ProfileView extends HookWidget {
   const ProfileView({
@@ -16,6 +17,8 @@ class ProfileView extends HookWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    String name = 'loading';
+
     return Scaffold(
       appBar: appBar(),
       drawer: SideNav(),
@@ -42,16 +45,37 @@ class ProfileView extends HookWidget {
                   ),
                   Positioned(
                     bottom: 0,
-                    left: width/4,
-                    child: const Text(
-                      "MANEESHA LAKSHANI",
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 1.0,
-                      ),
+                    left: 0,
+                    right: 0,
+                    child: FutureBuilder<Map<String, dynamic>?>(
+                      future: Authentications().getCurrentUser(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          // While the future is still running, you can show a loading indicator or placeholder.
+                          return CircularProgressIndicator(); // Replace this with your loading widget.
+                        } else if (snapshot.hasError) {
+                          // If there was an error while fetching user data, handle it here.
+                          return Text("Error: ${snapshot.error}");
+                        } else if (snapshot.hasData) {
+                          // User data is available; you can access it from snapshot.data.
+                          name = snapshot.data?['name'] ?? 'Name not found';
+
+                          return Text(
+                            name,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 1.0,
+                            ),
+                          );
+                        } else {
+                          // No user data found, you can handle this case as well.
+                          return Text("User data not found");
+                        }
+                      },
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -60,7 +84,7 @@ class ProfileView extends HookWidget {
               child: Column(
                 children: [
                   ClickableContainer(
-                    route: const MyProfileRoute(), 
+                    route: MyProfileRoute(name: name, userId: Authentications().getCurrentUserId()), 
                     text: "View Profile",
                     width: width/10*9,
                     bgColor: LIGHT_PINK,
@@ -80,5 +104,11 @@ class ProfileView extends HookWidget {
         ),
       ),
     );
+  }
+
+  getUserData() async {
+    var data = await Authentications().getCurrentUser();
+
+    return data?['name'];
   }
 }

@@ -7,6 +7,7 @@ import 'package:food_forward/pages/Components/clickable_container.dart';
 import 'package:food_forward/pages/Components/sideNav.dart';
 import 'package:food_forward/pages/stats/specified_stat_view/pieChartData.dart';
 import 'package:food_forward/routes/routes.gr.dart';
+import 'package:food_forward/services/authentication.dart';
 import 'package:food_forward/services/user_services.dart';
 
 class MyStatsView extends HookWidget {
@@ -18,6 +19,8 @@ class MyStatsView extends HookWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    String userId = Authentications().getCurrentUserId();
+
     return Scaffold(
       appBar: appBar(),
       drawer: SideNav(),
@@ -53,8 +56,8 @@ class MyStatsView extends HookWidget {
                 bgColor: LIGHT_PINK,
                 textColor: BLACK,
                 otherFunction: () async {
-                  final text = await getText(statType: 'donation');
-                  final percentage = await getPercentage(statType: 'donation');
+                  final text = await getText(statType: 'donation', userId: userId);
+                  final percentage = await getPercentage(statType: 'donation', userId: userId);
 
                   List<PieChartListData> totalDonationlistData = [
                     PieChartListData(color: Colors.pink, value: percentage),
@@ -77,8 +80,8 @@ class MyStatsView extends HookWidget {
                 bgColor: LIGHT_PINK,
                 textColor: BLACK,
                 otherFunction: () async {
-                  final text = await getText(statType: 'community');
-                  final percentage = await getPercentage(statType: 'community');
+                  final text = await getText(statType: 'community', userId: userId);
+                  final percentage = await getPercentage(statType: 'community', userId: userId);
 
                   List<PieChartListData> communitylistData = [
                     PieChartListData(color: Colors.green, value: percentage),
@@ -102,8 +105,8 @@ class MyStatsView extends HookWidget {
                 bgColor: LIGHT_PINK,
                 textColor: BLACK,
                 otherFunction: () async {
-                  final text = await getText(statType: 'env');
-                  final percentage = await getPercentage(statType: 'env');
+                  final text = await getText(statType: 'env', userId: userId);
+                  final percentage = await getPercentage(statType: 'env', userId: userId);
 
                   List<PieChartListData> tEnvironmentlistData = [
                     PieChartListData(color: Colors.red, value: percentage),
@@ -128,10 +131,10 @@ class MyStatsView extends HookWidget {
   }
 
 
-  getPercentage({required String statType}) async {
+  getPercentage({required String statType, required String userId}) async {
     UserUtilities userUtilities = UserUtilities();
-    double totDonations = await userUtilities.getTotalDonation();
-    double envImpact = await userUtilities.calculateEnvironmentalImpactRatio();
+    double totDonations = await userUtilities.getTotalDonation(userId: userId);
+    double envImpact = await userUtilities.calculateEnvironmentalImpactRatio(userId: userId);
     double comContributions = userUtilities.calculateCommunityContributionsPercentage(envImpact, totDonations);
 
     if(statType == 'donation'){
@@ -143,8 +146,8 @@ class MyStatsView extends HookWidget {
     }
   }
 
-  getText({required String statType}) async {
-    double percentage = await getPercentage(statType: statType);
+  getText({required String statType, required String userId}) async {
+    double percentage = await getPercentage(statType: statType, userId: userId);
     String formattedPercentage = percentage.toStringAsFixed(2); // Round to 2 decimal places
     if(statType == 'donation'){
       return "You have made $formattedPercentage% of all Donations";
