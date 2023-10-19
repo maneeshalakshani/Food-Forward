@@ -5,6 +5,7 @@ import 'package:food_forward/pages/Components/authenticateNavigator.dart';
 import 'package:food_forward/pages/Components/squareButton.dart';
 import 'package:food_forward/pages/Components/textField.dart';
 import 'package:food_forward/routes/routes.gr.dart';
+import 'package:food_forward/services/authentication.dart';
 
 class VolunteerSignUpView extends HookWidget {
   VolunteerSignUpView({
@@ -22,6 +23,11 @@ class VolunteerSignUpView extends HookWidget {
   final TextEditingController contactNoController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
 
+  final TextEditingController hotelNameController = TextEditingController();
+  final TextEditingController hotelLocationController = TextEditingController();
+
+  final TextEditingController cityController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -30,7 +36,38 @@ class VolunteerSignUpView extends HookWidget {
       // Get the selected delivery preference
       String selectedPreference = deliveryPreference.value;
 
-      print('Selected Delivery Preference: $selectedPreference');
+      userType == 'volunteer'
+        ? Authentications().registerVolunteerWithEmailAndPassword(
+            name: nameController.text,
+            email: emailController.text,
+            password: passwordController.text,
+            userType: userType,
+            address: addressController.text,
+            phone: contactNoController.text,
+            context: context
+          )
+        : userType == 'donor'
+          ? Authentications().registerDonorWithEmailAndPassword(
+              name: nameController.text,
+              email: emailController.text,
+              password: passwordController.text,
+              userType: userType,
+              hotelLocation: hotelLocationController.text,
+              hotelName: hotelNameController.text,
+              context: context,
+            )
+          : Authentications().registerRecipientWithEmailAndPassword(
+              name: nameController.text,
+              email: emailController.text,
+              password: passwordController.text,
+              userType: userType,
+              address: addressController.text,
+              phone: contactNoController.text,
+              preference: selectedPreference,
+              city: cityController.text,
+              context: context,
+            );  
+      
     }
 
     return Scaffold(
@@ -75,17 +112,41 @@ class VolunteerSignUpView extends HookWidget {
                   prefixIcon: Icons.person,
                   controller: nameController,
                 ),
-                CustomeTextField(
-                  label: "Address",
-                  prefixIcon: Icons.home,
-                  marginTop: 30,
-                  controller: addressController,
-                ),
-                CustomeTextField(
-                  label: "Contact Number",
-                  prefixIcon: Icons.contact_phone,
-                  controller: contactNoController,
-                ),
+                userType == 'volunteer' || userType == 'recipient'
+                  ? CustomeTextField(
+                      label: "Address",
+                      prefixIcon: Icons.home,
+                      controller: addressController,
+                    )
+                  : const SizedBox(),
+                userType == 'volunteer' || userType == 'recipient'
+                  ?  CustomeTextField(
+                      label: "Contact Number",
+                      prefixIcon: Icons.contact_phone,
+                      controller: contactNoController,
+                    )
+                  : const SizedBox(),
+                userType == 'donor'
+                  ? CustomeTextField(
+                      label: "Hotel Name",
+                      prefixIcon: Icons.hotel,
+                      controller: hotelNameController,
+                    )
+                  : const SizedBox(),
+                userType == 'donor'  
+                  ?  CustomeTextField(
+                      label: "Hotel Location",
+                      prefixIcon: Icons.map,
+                      controller: hotelLocationController,
+                    )
+                  : const SizedBox(),
+                userType == 'recipient'  
+                  ?  CustomeTextField(
+                      label: "City",
+                      prefixIcon: Icons.location_city,
+                      controller: cityController,
+                    )
+                  : const SizedBox(),
                 CustomeTextField(
                   label: "Password",
                   prefixIcon: Icons.password,
