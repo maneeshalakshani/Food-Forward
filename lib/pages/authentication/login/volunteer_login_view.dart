@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:food_forward/pages/Components/appbar.dart';
@@ -6,6 +5,7 @@ import 'package:food_forward/pages/Components/authenticateNavigator.dart';
 import 'package:food_forward/pages/Components/squareButton.dart';
 import 'package:food_forward/pages/Components/textField.dart';
 import 'package:food_forward/routes/routes.gr.dart';
+import 'package:food_forward/services/authentication.dart';
 
 class VolunteerLoginView extends HookWidget {
   VolunteerLoginView({
@@ -14,7 +14,7 @@ class VolunteerLoginView extends HookWidget {
   }) : super(key: key);
   final String userType;
 
-  final TextEditingController userNameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   @override
@@ -61,10 +61,10 @@ class VolunteerLoginView extends HookWidget {
                   ),
                 ),
                 CustomeTextField(
-                  label: "Username",
+                  label: "Email",
                   prefixIcon: Icons.email,
                   marginTop: 30,
-                  controller: userNameController,
+                  controller: emailController,
                 ),
                 CustomeTextField(
                   label: "Password",
@@ -75,10 +75,28 @@ class VolunteerLoginView extends HookWidget {
                   text: "login".toUpperCase(),
                   onPressed: () {
                     userType == 'volunteer'
-                      ? context.router.push(const VolunteerProfileRoute())
+                      ? Authentications().loginWithEmailAndPassword(
+                          email: emailController.text, 
+                          password: passwordController.text, 
+                          userType: userType, 
+                          context: context, 
+                          route: const VolunteerProfileRoute()
+                        )
                       : userType == 'donor'
-                        ? context.router.push(const DonorFoodListRoute())
-                        : context.router.push(const ExplorerRoute());
+                        ? Authentications().loginWithEmailAndPassword(
+                            email: emailController.text, 
+                            password: passwordController.text, 
+                            userType: userType, 
+                            context: context, 
+                            route: const DonorFoodListRoute()
+                          )
+                        : Authentications().loginWithEmailAndPassword(
+                            email: emailController.text, 
+                            password: passwordController.text, 
+                            userType: userType, 
+                            context: context, 
+                            route: const ExplorerRoute()
+                          );
                   },
                 ),
                 AuthenticateNavigator(
