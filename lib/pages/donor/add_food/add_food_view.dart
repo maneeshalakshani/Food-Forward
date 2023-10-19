@@ -5,6 +5,8 @@ import 'package:food_forward/pages/Components/sideNav.dart';
 import 'package:food_forward/pages/Components/squareButton.dart';
 import 'package:food_forward/pages/Components/textField.dart';
 import 'package:food_forward/pages/donor/add_food/food_preference_selection.dart';
+import 'package:food_forward/pages/donor/add_food/food_state.dart';
+import 'package:food_forward/pages/donor/add_food/image_picker_button.dart';
 import 'package:food_forward/routes/routes.gr.dart';
 import 'package:food_forward/services/authentication.dart';
 import 'package:food_forward/services/donor/donor_services.dart';
@@ -24,6 +26,7 @@ class DonorAddFoodView extends HookWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     String selectedPreference = 'veg'; 
+    FoodStore store = FoodStore();
 
     return Scaffold(
       appBar: appBar(),
@@ -75,6 +78,7 @@ class DonorAddFoodView extends HookWidget {
                   selectedPreference = value;
                 },
               ),
+              ImagePickerWidget(store: store,),
               SquareButton(
                 onPressed: () async {
                   print("Selected Food Preference: $selectedPreference");
@@ -85,7 +89,7 @@ class DonorAddFoodView extends HookWidget {
                     quantity: quantityController.text, 
                     expiryDate: expiryController.text, 
                     foodPreference: selectedPreference,
-                    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBxJxenAHi3BQqhFEjjW4m5u07Wg0dNC4u3k6jX0263bEM1CAb-k4mM10mOFDVVHt2h2E&usqp=CAU",
+                    imageUrl: store.uploadedImageLink ?? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBxJxenAHi3BQqhFEjjW4m5u07Wg0dNC4u3k6jX0263bEM1CAb-k4mM10mOFDVVHt2h2E&usqp=CAU",
                     context: context,
                     userId: Authentications().getCurrentUserId(),
                     environmentalImpact: int.parse(envImpactController.text),
