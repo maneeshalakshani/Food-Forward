@@ -110,6 +110,8 @@ class AppRouter extends _i21.RootStackRouter {
         child: _i8.VolunteerLoginView(
           key: args.key,
           userType: args.userType,
+          showAnalytics: args.showAnalytics,
+          labelUser: args.labelUser,
         ),
       );
     },
@@ -120,6 +122,7 @@ class AppRouter extends _i21.RootStackRouter {
         child: _i9.VolunteerSignUpView(
           key: args.key,
           userType: args.userType,
+          labelUser: args.labelUser,
         ),
       );
     },
@@ -451,12 +454,16 @@ class VolunteerLoginRoute extends _i21.PageRouteInfo<VolunteerLoginRouteArgs> {
   VolunteerLoginRoute({
     _i22.Key? key,
     required String userType,
+    bool? showAnalytics = false,
+    required String labelUser,
   }) : super(
           VolunteerLoginRoute.name,
           path: '/volunteer-login-view',
           args: VolunteerLoginRouteArgs(
             key: key,
             userType: userType,
+            showAnalytics: showAnalytics,
+            labelUser: labelUser,
           ),
         );
 
@@ -467,15 +474,21 @@ class VolunteerLoginRouteArgs {
   const VolunteerLoginRouteArgs({
     this.key,
     required this.userType,
+    this.showAnalytics = false,
+    required this.labelUser,
   });
 
   final _i22.Key? key;
 
   final String userType;
 
+  final bool? showAnalytics;
+
+  final String labelUser;
+
   @override
   String toString() {
-    return 'VolunteerLoginRouteArgs{key: $key, userType: $userType}';
+    return 'VolunteerLoginRouteArgs{key: $key, userType: $userType, showAnalytics: $showAnalytics, labelUser: $labelUser}';
   }
 }
 
@@ -486,12 +499,14 @@ class VolunteerSignUpRoute
   VolunteerSignUpRoute({
     _i22.Key? key,
     required String userType,
+    required String labelUser,
   }) : super(
           VolunteerSignUpRoute.name,
           path: '/volunteer-sign-up-view',
           args: VolunteerSignUpRouteArgs(
             key: key,
             userType: userType,
+            labelUser: labelUser,
           ),
         );
 
@@ -502,15 +517,18 @@ class VolunteerSignUpRouteArgs {
   const VolunteerSignUpRouteArgs({
     this.key,
     required this.userType,
+    required this.labelUser,
   });
 
   final _i22.Key? key;
 
   final String userType;
 
+  final String labelUser;
+
   @override
   String toString() {
-    return 'VolunteerSignUpRouteArgs{key: $key, userType: $userType}';
+    return 'VolunteerSignUpRouteArgs{key: $key, userType: $userType, labelUser: $labelUser}';
   }
 }
 

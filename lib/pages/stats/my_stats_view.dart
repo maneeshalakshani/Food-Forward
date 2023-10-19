@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:food_forward/const.dart';
 import 'package:food_forward/pages/Components/appbar.dart';
 import 'package:food_forward/pages/Components/clickable_container.dart';
+import 'package:food_forward/pages/Components/sideNav.dart';
 import 'package:food_forward/pages/stats/specified_stat_view/pieChartData.dart';
 import 'package:food_forward/routes/routes.gr.dart';
 import 'package:food_forward/services/user_services.dart';
@@ -19,6 +20,7 @@ class MyStatsView extends HookWidget {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: appBar(),
+      drawer: SideNav(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),

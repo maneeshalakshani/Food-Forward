@@ -43,17 +43,18 @@ class _MenuViewState extends State<MenuView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const ClickableContainer(
-                  text: "Donor", 
+                ClickableContainer(
+                  text: "Donor Analytics", 
                   imgUrl: "assets/avatar.png",
                   width: 150,
-                  route: ProfileRoute(),
+                  // route: ProfileRoute(),
+                  route: VolunteerLoginRoute(userType: 'donor', showAnalytics: true, labelUser: "Donor"),
                 ),
                 ClickableContainer(
                   text: "Recipient", 
                   imgUrl: "assets/avatar.png",
                   width: 150,
-                  route: VolunteerLoginRoute(userType: 'recipient'),
+                  route: VolunteerLoginRoute(userType: 'recipient', labelUser: "Recipient"),
                 ),
               ],
             ),
@@ -61,13 +62,13 @@ class _MenuViewState extends State<MenuView> {
               text: "Volunteer Community", 
               imgUrl: "assets/avatar.png",
               width: 310,
-              route: VolunteerLoginRoute(userType: 'volunteer'),
+              route: VolunteerLoginRoute(userType: 'volunteer', labelUser: "Volunteer"),
             ),
             ClickableContainer(
               text: "Donor Community", 
               imgUrl: "assets/avatar.png",
               width: 310,
-              route: VolunteerLoginRoute(userType: 'donor'),
+              route: VolunteerLoginRoute(userType: 'donor', labelUser: "Donor"),
             ),
           ],
         )

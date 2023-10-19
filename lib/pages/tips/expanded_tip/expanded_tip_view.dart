@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:food_forward/const.dart';
 import 'package:food_forward/pages/Components/appbar.dart';
 import 'package:food_forward/pages/Components/clickable_container.dart';
+import 'package:food_forward/pages/Components/sideNav.dart';
 import 'package:food_forward/pages/tips/expanded_tip/tip_detailed_card.dart';
 import 'package:food_forward/pages/tips/tips_list.dart';
 
@@ -23,6 +24,7 @@ class ExpandedTipView extends HookWidget {
 
     return Scaffold(
       appBar: appBar(),
+      drawer: SideNav(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),

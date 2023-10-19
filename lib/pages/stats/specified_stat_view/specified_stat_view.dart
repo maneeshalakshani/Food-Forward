@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:food_forward/const.dart';
 import 'package:food_forward/pages/Components/appbar.dart';
 import 'package:food_forward/pages/Components/clickable_container.dart';
+import 'package:food_forward/pages/Components/sideNav.dart';
 import 'package:food_forward/pages/stats/specified_stat_view/customPieChart.dart';
 import 'package:food_forward/pages/stats/specified_stat_view/pieChartData.dart';
 
@@ -30,6 +31,7 @@ class SpecifiedStatView extends HookWidget {
 
     return Scaffold(
       appBar: appBar(),
+      drawer: SideNav(),
       body: SingleChildScrollView(
         child: Container(
           height: height-160,
