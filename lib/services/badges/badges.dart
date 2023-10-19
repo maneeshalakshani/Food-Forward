@@ -20,6 +20,14 @@ class BadgesFunction {
         .get();
   }
 
+  getAllBadgesWithName({required String userId, required String name}) {
+    return FirebaseFirestore.instance
+        .collection(fireStoreCollectionName)
+        .where('userId', isEqualTo: userId)
+        .where('name', isEqualTo: name)
+        .get();
+  }
+
   createBadge(
       {required String name,
       required String category,

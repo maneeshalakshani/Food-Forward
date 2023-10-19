@@ -71,12 +71,27 @@ class MyProfileView extends HookWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const Text(
-                      "Bronze User 1/3",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.purple
-                      ),
+                    FutureBuilder<String>(
+                      future: getTitles(userId: "er242dYU"),
+                      builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                        if (snapshot.connectionState == ConnectionState.done) {
+                          return Text(
+                            snapshot.data ?? 'Default Value', 
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: Colors.purple,
+                            ),
+                          );
+                        } else {
+                          return const Text(
+                            'Loading...', 
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.purple,
+                            ),
+                          );
+                        }
+                      },
                     ),
                     Image.asset(
                       "assets/delivery.png",
@@ -204,5 +219,25 @@ class MyProfileView extends HookWidget {
   checkBadgeAlreadyReceived({required String category, required String userId}) async {
     QuerySnapshot querySnapshot = await BadgesFunction().getAllBadgesWithCategory(userId: userId, category: category);
     return querySnapshot.size;
+  }
+
+  checkNoOfRedBadges({required String name, required String userId}) async {
+    QuerySnapshot querySnapshot = await BadgesFunction().getAllBadgesWithName(userId: userId, name: name);
+    return querySnapshot.size;
+  }
+
+  Future<String> getTitles({required String userId}) async {
+    int redBadges = await checkNoOfRedBadges(name: "red", userId: userId);
+    if(redBadges > 3){
+      return "Platinum User $redBadges";
+    }else if(redBadges == 3){
+      return "Gold User 3/3";
+    }else if(redBadges == 2){
+      return "Silver User 2/3";
+    }else if(redBadges == 1){
+      return "Bronze User 1/3";
+    }else{
+      return "Normal user";
+    }
   }
 }
