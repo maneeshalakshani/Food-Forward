@@ -4,7 +4,7 @@ class UserUtilities{
   getAllFoodWithUserId() {
     return FirebaseFirestore.instance
       .collection("Foods")
-      .where('userId', isEqualTo: 'hfulUJHI2h34');
+      .where('userId', isEqualTo: 'er242dYU');
   }
 
   getAllFood() {

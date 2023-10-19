@@ -86,7 +86,7 @@ class DonorAddFoodView extends HookWidget {
                     foodPreference: selectedPreference,
                     imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBxJxenAHi3BQqhFEjjW4m5u07Wg0dNC4u3k6jX0263bEM1CAb-k4mM10mOFDVVHt2h2E&usqp=CAU",
                     context: context,
-                    userId: "jkked234iGYW",
+                    userId: "er242dYU",
                     environmentalImpact: int.parse(envImpactController.text),
                     route: const DonorFoodListRoute()
                   );
