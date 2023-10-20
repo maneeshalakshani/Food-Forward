@@ -6,6 +6,7 @@ import 'package:food_forward/models/Cart.dart';
 import 'package:food_forward/models/CartItem.dart';
 import 'package:food_forward/models/Food.dart';
 import 'package:food_forward/routes/routes.gr.dart';
+import 'package:food_forward/services/auth_state.dart';
 
 class ExplorerCard extends HookWidget {
   const ExplorerCard({
@@ -13,10 +14,12 @@ class ExplorerCard extends HookWidget {
     required this.context,
     required this.data,
     required this.cart,
+    required this.authStore,
   }) : super(key: key);
   final BuildContext context;
   final DocumentSnapshot data;
   final Cart cart;
+  final AuthStore authStore;
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +63,7 @@ class ExplorerCard extends HookWidget {
                       onTap: (){
                         CartItem item = CartItem(food: food, noOfItems: 1);
                         cart.addItem(item);
-                        context.router.push(CartRoute(cart: cart));
+                        context.router.push(CartRoute(cart: cart,authStore: authStore));
                       },
                       child: Icon(Icons.add),
                     ),

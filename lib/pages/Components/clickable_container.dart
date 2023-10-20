@@ -36,7 +36,7 @@ class ClickableContainer extends HookWidget {
       child: Card(
         color: bgColor ?? BLACK,
         child: Container(
-          height: height ?? 100,
+          height: height ?? 120,
           width: width ?? 100,
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Center(

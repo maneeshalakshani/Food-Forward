@@ -98,7 +98,7 @@ class MyProfileView extends HookWidget {
                       },
                     ),
                     Image.asset(
-                      "assets/delivery.png",
+                      "assets/red.png",
                       height: 40,
                     )
                   ],

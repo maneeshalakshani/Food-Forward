@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:food_forward/services/auth_state.dart';
 
 class Authentications{
   
@@ -167,6 +168,7 @@ class Authentications{
     required String userType,
     required BuildContext context,
     required route,
+    required AuthStore store,
   }) async {
     try {
       UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -194,6 +196,10 @@ class Authentications{
             textColor: Colors.white,
             fontSize: 16.0
           );
+          store.setUserId(userId: user!.uid);
+          userDoc['userType'] == 'recipient'
+            ? store.setFoodPreference(foodPreference: userDoc['preference'])
+            : null;
           context.router.push(route);
         } else {
           // User is not a userType

@@ -9,13 +9,16 @@ import 'package:food_forward/pages/donor/add_food/food_preference_selection.dart
 import 'package:food_forward/pages/donor/add_food/food_state.dart';
 import 'package:food_forward/pages/donor/add_food/image_picker_button.dart';
 import 'package:food_forward/routes/routes.gr.dart';
+import 'package:food_forward/services/auth_state.dart';
 import 'package:food_forward/services/authentication.dart';
 import 'package:food_forward/services/donor/donor_services.dart';
 
 class DonorAddFoodView extends HookWidget {
   DonorAddFoodView({
     Key? key,
+    required this.authStore,
   }) : super(key: key);
+  final AuthStore authStore;
 
   final TextEditingController foodNameController = TextEditingController();
   final TextEditingController expiryController = TextEditingController();
@@ -104,7 +107,7 @@ class DonorAddFoodView extends HookWidget {
                     context: context,
                     userId: Authentications().getCurrentUserId(),
                     environmentalImpact: int.parse(envImpactController.text),
-                    route: const DonorFoodListRoute()
+                    route: DonorFoodListRoute(authStore: authStore)
                   );
                 },
                 text: "Add Food",

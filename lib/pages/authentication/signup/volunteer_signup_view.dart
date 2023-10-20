@@ -153,11 +153,13 @@ class VolunteerSignUpView extends HookWidget {
                   label: "Password (at least 6 characters)",
                   prefixIcon: Icons.password,
                   controller: passwordController,
+                  obscureText: true,
                 ),
                 CustomeTextField(
                   label: "Confirm Password",
                   prefixIcon: Icons.verified,
                   controller: confirmPasswordController,
+                  obscureText: true,
                 ),
                 userType == 'recipient'
                   ? StatefulBuilder(

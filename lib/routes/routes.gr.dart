@@ -14,8 +14,8 @@
 import 'package:auto_route/auto_route.dart' as _i22;
 import 'package:flutter/material.dart' as _i23;
 
-import '../models/Cart.dart' as _i26;
-import '../models/Food.dart' as _i27;
+import '../models/Cart.dart' as _i27;
+import '../models/Food.dart' as _i28;
 import '../pages/authentication/login/volunteer_login_view.dart' as _i8;
 import '../pages/authentication/signup/volunteer_signup_view.dart' as _i9;
 import '../pages/donor/add_food/add_food_view.dart' as _i18;
@@ -41,6 +41,7 @@ import '../pages/volunteer/my_tasks/complete_task/complete_task_view.dart'
 import '../pages/volunteer/my_tasks/my_tasks_view.dart' as _i12;
 import '../pages/volunteer/notifications/my_notifications_view.dart' as _i11;
 import '../pages/volunteer/rewards/rewards_view.dart' as _i21;
+import '../services/auth_state.dart' as _i26;
 
 class AppRouter extends _i22.RootStackRouter {
   AppRouter([_i23.GlobalKey<_i23.NavigatorState>? navigatorKey])
@@ -157,16 +158,23 @@ class AppRouter extends _i22.RootStackRouter {
       );
     },
     ExplorerRoute.name: (routeData) {
+      final args = routeData.argsAs<ExplorerRouteArgs>();
       return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i14.ExplorerView(),
+        child: _i14.ExplorerView(
+          key: args.key,
+          authStore: args.authStore,
+        ),
       );
     },
     CartRoute.name: (routeData) {
       final args = routeData.argsAs<CartRouteArgs>();
       return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i15.CartView(cart: args.cart),
+        child: _i15.CartView(
+          cart: args.cart,
+          authStore: args.authStore,
+        ),
       );
     },
     OrderConfirmRoute.name: (routeData) {
@@ -176,21 +184,28 @@ class AppRouter extends _i22.RootStackRouter {
         child: _i16.OrderConfirmView(
           key: args.key,
           orderNo: args.orderNo,
+          authStore: args.authStore,
         ),
       );
     },
     DonorFoodListRoute.name: (routeData) {
+      final args = routeData.argsAs<DonorFoodListRouteArgs>();
       return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i17.DonorFoodListView(),
+        child: _i17.DonorFoodListView(
+          key: args.key,
+          authStore: args.authStore,
+        ),
       );
     },
     DonorAddFoodRoute.name: (routeData) {
-      final args = routeData.argsAs<DonorAddFoodRouteArgs>(
-          orElse: () => const DonorAddFoodRouteArgs());
+      final args = routeData.argsAs<DonorAddFoodRouteArgs>();
       return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i18.DonorAddFoodView(key: args.key),
+        child: _i18.DonorAddFoodView(
+          key: args.key,
+          authStore: args.authStore,
+        ),
       );
     },
     DonorUpdateFoodRoute.name: (routeData) {
@@ -200,6 +215,7 @@ class AppRouter extends _i22.RootStackRouter {
         child: _i19.DonorUpdateFoodView(
           key: args.key,
           food: args.food,
+          authStore: args.authStore,
         ),
       );
     },
@@ -625,37 +641,69 @@ class VolunteerCompleteTaskRoute extends _i22.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i14.ExplorerView]
-class ExplorerRoute extends _i22.PageRouteInfo<void> {
-  const ExplorerRoute()
-      : super(
+class ExplorerRoute extends _i22.PageRouteInfo<ExplorerRouteArgs> {
+  ExplorerRoute({
+    _i23.Key? key,
+    required _i26.AuthStore authStore,
+  }) : super(
           ExplorerRoute.name,
           path: '/explorer-view',
+          args: ExplorerRouteArgs(
+            key: key,
+            authStore: authStore,
+          ),
         );
 
   static const String name = 'ExplorerRoute';
 }
 
+class ExplorerRouteArgs {
+  const ExplorerRouteArgs({
+    this.key,
+    required this.authStore,
+  });
+
+  final _i23.Key? key;
+
+  final _i26.AuthStore authStore;
+
+  @override
+  String toString() {
+    return 'ExplorerRouteArgs{key: $key, authStore: $authStore}';
+  }
+}
+
 /// generated route for
 /// [_i15.CartView]
 class CartRoute extends _i22.PageRouteInfo<CartRouteArgs> {
-  CartRoute({required _i26.Cart cart})
-      : super(
+  CartRoute({
+    required _i27.Cart cart,
+    required _i26.AuthStore authStore,
+  }) : super(
           CartRoute.name,
           path: '/cart-view',
-          args: CartRouteArgs(cart: cart),
+          args: CartRouteArgs(
+            cart: cart,
+            authStore: authStore,
+          ),
         );
 
   static const String name = 'CartRoute';
 }
 
 class CartRouteArgs {
-  const CartRouteArgs({required this.cart});
+  const CartRouteArgs({
+    required this.cart,
+    required this.authStore,
+  });
 
-  final _i26.Cart cart;
+  final _i27.Cart cart;
+
+  final _i26.AuthStore authStore;
 
   @override
   String toString() {
-    return 'CartRouteArgs{cart: $cart}';
+    return 'CartRouteArgs{cart: $cart, authStore: $authStore}';
   }
 }
 
@@ -665,12 +713,14 @@ class OrderConfirmRoute extends _i22.PageRouteInfo<OrderConfirmRouteArgs> {
   OrderConfirmRoute({
     _i23.Key? key,
     required String orderNo,
+    required _i26.AuthStore authStore,
   }) : super(
           OrderConfirmRoute.name,
           path: '/order-confirm-view',
           args: OrderConfirmRouteArgs(
             key: key,
             orderNo: orderNo,
+            authStore: authStore,
           ),
         );
 
@@ -681,51 +731,86 @@ class OrderConfirmRouteArgs {
   const OrderConfirmRouteArgs({
     this.key,
     required this.orderNo,
+    required this.authStore,
   });
 
   final _i23.Key? key;
 
   final String orderNo;
 
+  final _i26.AuthStore authStore;
+
   @override
   String toString() {
-    return 'OrderConfirmRouteArgs{key: $key, orderNo: $orderNo}';
+    return 'OrderConfirmRouteArgs{key: $key, orderNo: $orderNo, authStore: $authStore}';
   }
 }
 
 /// generated route for
 /// [_i17.DonorFoodListView]
-class DonorFoodListRoute extends _i22.PageRouteInfo<void> {
-  const DonorFoodListRoute()
-      : super(
+class DonorFoodListRoute extends _i22.PageRouteInfo<DonorFoodListRouteArgs> {
+  DonorFoodListRoute({
+    _i23.Key? key,
+    required _i26.AuthStore authStore,
+  }) : super(
           DonorFoodListRoute.name,
           path: '/donor-food-list-view',
+          args: DonorFoodListRouteArgs(
+            key: key,
+            authStore: authStore,
+          ),
         );
 
   static const String name = 'DonorFoodListRoute';
 }
 
+class DonorFoodListRouteArgs {
+  const DonorFoodListRouteArgs({
+    this.key,
+    required this.authStore,
+  });
+
+  final _i23.Key? key;
+
+  final _i26.AuthStore authStore;
+
+  @override
+  String toString() {
+    return 'DonorFoodListRouteArgs{key: $key, authStore: $authStore}';
+  }
+}
+
 /// generated route for
 /// [_i18.DonorAddFoodView]
 class DonorAddFoodRoute extends _i22.PageRouteInfo<DonorAddFoodRouteArgs> {
-  DonorAddFoodRoute({_i23.Key? key})
-      : super(
+  DonorAddFoodRoute({
+    _i23.Key? key,
+    required _i26.AuthStore authStore,
+  }) : super(
           DonorAddFoodRoute.name,
           path: '/donor-add-food-view',
-          args: DonorAddFoodRouteArgs(key: key),
+          args: DonorAddFoodRouteArgs(
+            key: key,
+            authStore: authStore,
+          ),
         );
 
   static const String name = 'DonorAddFoodRoute';
 }
 
 class DonorAddFoodRouteArgs {
-  const DonorAddFoodRouteArgs({this.key});
+  const DonorAddFoodRouteArgs({
+    this.key,
+    required this.authStore,
+  });
 
   final _i23.Key? key;
 
+  final _i26.AuthStore authStore;
+
   @override
   String toString() {
-    return 'DonorAddFoodRouteArgs{key: $key}';
+    return 'DonorAddFoodRouteArgs{key: $key, authStore: $authStore}';
   }
 }
 
@@ -735,13 +820,15 @@ class DonorUpdateFoodRoute
     extends _i22.PageRouteInfo<DonorUpdateFoodRouteArgs> {
   DonorUpdateFoodRoute({
     _i23.Key? key,
-    required _i27.Food food,
+    required _i28.Food food,
+    required _i26.AuthStore authStore,
   }) : super(
           DonorUpdateFoodRoute.name,
           path: '/donor-update-food-view',
           args: DonorUpdateFoodRouteArgs(
             key: key,
             food: food,
+            authStore: authStore,
           ),
         );
 
@@ -752,15 +839,18 @@ class DonorUpdateFoodRouteArgs {
   const DonorUpdateFoodRouteArgs({
     this.key,
     required this.food,
+    required this.authStore,
   });
 
   final _i23.Key? key;
 
-  final _i27.Food food;
+  final _i28.Food food;
+
+  final _i26.AuthStore authStore;
 
   @override
   String toString() {
-    return 'DonorUpdateFoodRouteArgs{key: $key, food: $food}';
+    return 'DonorUpdateFoodRouteArgs{key: $key, food: $food, authStore: $authStore}';
   }
 }
 

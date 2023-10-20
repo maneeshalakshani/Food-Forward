@@ -20,7 +20,7 @@ class _MenuViewState extends State<MenuView> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Padding(
-                padding: EdgeInsets.symmetric(vertical: 50),
+                padding: EdgeInsets.symmetric(vertical: 20),
                 child: Text(
                   "Welcome",
                   style: TextStyle(
@@ -30,10 +30,10 @@ class _MenuViewState extends State<MenuView> {
               ),
               Image.asset(
                 LOGO_URL,
-                height: 100.0,
+                height: 200.0,
               ),
               const Padding(
-                padding: EdgeInsets.symmetric(vertical: 50),
+                padding: EdgeInsets.symmetric(vertical: 20),
                 child: Text(
                   APP_NAME,
                   style: TextStyle(
@@ -46,14 +46,14 @@ class _MenuViewState extends State<MenuView> {
                 children: [
                   ClickableContainer(
                     text: "Donor Analytics", 
-                    imgUrl: "assets/avatar.png",
+                    imgUrl: "assets/donor-menu.png",
                     width: 150,
                     // route: ProfileRoute(),
                     route: VolunteerLoginRoute(userType: 'donor', showAnalytics: true, labelUser: "Donor"),
                   ),
                   ClickableContainer(
                     text: "Recipient", 
-                    imgUrl: "assets/avatar.png",
+                    imgUrl: "assets/recipient-menu.png",
                     width: 150,
                     route: VolunteerLoginRoute(userType: 'recipient', labelUser: "Recipient"),
                   ),
@@ -67,7 +67,7 @@ class _MenuViewState extends State<MenuView> {
               ),
               ClickableContainer(
                 text: "Donor Community", 
-                imgUrl: "assets/avatar.png",
+                imgUrl: "assets/donor-menu.png",
                 width: 310,
                 route: VolunteerLoginRoute(userType: 'donor', labelUser: "Donor"),
               ),

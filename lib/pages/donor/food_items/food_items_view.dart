@@ -7,12 +7,15 @@ import 'package:food_forward/pages/Components/appbar.dart';
 import 'package:food_forward/pages/Components/sideNav.dart';
 import 'package:food_forward/pages/donor/food_items/food_item_card.dart';
 import 'package:food_forward/routes/routes.gr.dart';
+import 'package:food_forward/services/auth_state.dart';
 import 'package:food_forward/services/donor/donor_services.dart';
 
 class DonorFoodListView extends HookWidget {
   const DonorFoodListView({
     Key? key, 
+    required this.authStore,
   }) : super(key: key);
+  final AuthStore authStore;
 
 
   @override
@@ -24,7 +27,7 @@ class DonorFoodListView extends HookWidget {
       appBar: appBar(),
       drawer: SideNav(),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => context.router.push(DonorAddFoodRoute()),
+        onPressed: () => context.router.push(DonorAddFoodRoute(authStore: authStore)),
         backgroundColor: const Color.fromARGB(255, 70, 17, 14),
         child: const Icon(Icons.add),
       ),
@@ -48,7 +51,7 @@ class DonorFoodListView extends HookWidget {
                 ),
               Expanded(
                 child: StreamBuilder<QuerySnapshot>(
-                  stream: DonorFunction().getAllFood(),
+                  stream: DonorFunction().getAllFoodByUserId(userId: authStore.userId!),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
                       return Text('Error ${snapshot.error}');
@@ -74,7 +77,7 @@ class DonorFoodListView extends HookWidget {
         return FoodItemCard(
           context: context,
           data: snapshot[index],
-          updateRoute: DonorUpdateFoodRoute(food: Food.fromSnapshot(snapshot[index])),
+          updateRoute: DonorUpdateFoodRoute(food: Food.fromSnapshot(snapshot[index]), authStore: authStore),
         );
       },
     );

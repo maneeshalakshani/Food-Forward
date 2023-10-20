@@ -9,11 +9,13 @@ import 'package:food_forward/pages/donor/add_food/date_picker.dart';
 import 'package:food_forward/pages/donor/add_food/food_preference_selection.dart';
 import 'package:food_forward/pages/donor/add_food/food_state.dart';
 import 'package:food_forward/routes/routes.gr.dart';
+import 'package:food_forward/services/auth_state.dart';
 import 'package:food_forward/services/donor/donor_services.dart';
 
 class DonorUpdateFoodView extends StatefulWidget {
-  const DonorUpdateFoodView({super.key, required this.food});
+  const DonorUpdateFoodView({super.key, required this.food, required this.authStore});
   final Food food;
+  final AuthStore authStore;
 
 
   @override
@@ -53,6 +55,7 @@ class _DonorUpdateFoodViewState extends State<DonorUpdateFoodView> {
       selectedPreference: selectedPreference,
       envImpactController: envImpactController,
       store: store,
+      authStore: widget.authStore,
     );
   }
 }
@@ -68,6 +71,7 @@ class DonorUpdateFood extends HookWidget {
     required this.quantityController,
     required this.selectedPreference,
     required this.envImpactController,
+    required this.authStore,
     required this.store,
   }) : super(key: key);
   final Food food;
@@ -78,6 +82,7 @@ class DonorUpdateFood extends HookWidget {
   final TextEditingController envImpactController;
   var selectedPreference; 
   FoodStore store;
+  final AuthStore authStore;
 
   @override
   Widget build(BuildContext context) {
@@ -148,7 +153,7 @@ class DonorUpdateFood extends HookWidget {
                     environmentalImpact: int.parse(envImpactController.text),
                     context: context,
                     userId: food.userId,
-                    route: const DonorFoodListRoute()
+                    route: DonorFoodListRoute(authStore: authStore)
                   );
                     // context.router.push(const DonorFoodListRoute());
                 },

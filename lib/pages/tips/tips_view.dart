@@ -38,7 +38,7 @@ class TipsView extends HookWidget {
                   itemCount: tipsList.length,
                   itemBuilder: (context, i){
                     return TipCard(
-                      imageURL: LOGO_URL, 
+                      imageURL: 'assets/bulb.png', 
                       tipLabel: tipsList[i].tipTitle,
                       tipID: i,
                       tipItem: tipsList[i],
