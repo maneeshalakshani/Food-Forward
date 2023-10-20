@@ -105,7 +105,7 @@ class VolunteerLoginView extends HookWidget {
                             store: store,
                             userType: userType, 
                             context: context, 
-                            route: const ExplorerRoute()
+                            route: ExplorerRoute(authStore: store)
                           );
                   },
                 ),

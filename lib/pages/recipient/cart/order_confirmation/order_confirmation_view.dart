@@ -5,13 +5,16 @@ import 'package:food_forward/pages/Components/appbar.dart';
 import 'package:food_forward/pages/Components/sideNav.dart';
 import 'package:food_forward/pages/Components/squareButton.dart';
 import 'package:food_forward/routes/routes.gr.dart';
+import 'package:food_forward/services/auth_state.dart';
 
 class OrderConfirmView extends HookWidget {
   const OrderConfirmView({
     Key? key,
     required this.orderNo,
+    required this.authStore,
   }) : super(key: key);
   final String orderNo;
+  final AuthStore authStore;
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +82,7 @@ class OrderConfirmView extends HookWidget {
               ),
               SizedBox(height: 20),
               SquareButton(
-                onPressed: () => context.router.push(const ExplorerRoute()),
+                onPressed: () => context.router.push(ExplorerRoute(authStore: authStore)),
                 text: "OK",
               ),
               SquareButton(

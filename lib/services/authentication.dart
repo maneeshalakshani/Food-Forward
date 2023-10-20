@@ -197,6 +197,9 @@ class Authentications{
             fontSize: 16.0
           );
           store.setUserId(userId: user!.uid);
+          userDoc['userType'] == 'recipient'
+            ? store.setFoodPreference(foodPreference: userDoc['preference'])
+            : null;
           context.router.push(route);
         } else {
           // User is not a userType

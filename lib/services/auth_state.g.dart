@@ -24,6 +24,22 @@ mixin _$AuthStore on _AuthStore, Store {
     });
   }
 
+  late final _$foodPreferenceAtom =
+      Atom(name: '_AuthStore.foodPreference', context: context);
+
+  @override
+  String? get foodPreference {
+    _$foodPreferenceAtom.reportRead();
+    return super.foodPreference;
+  }
+
+  @override
+  set foodPreference(String? value) {
+    _$foodPreferenceAtom.reportWrite(value, super.foodPreference, () {
+      super.foodPreference = value;
+    });
+  }
+
   late final _$_AuthStoreActionController =
       ActionController(name: '_AuthStore', context: context);
 
@@ -39,9 +55,21 @@ mixin _$AuthStore on _AuthStore, Store {
   }
 
   @override
+  void setFoodPreference({required String foodPreference}) {
+    final _$actionInfo = _$_AuthStoreActionController.startAction(
+        name: '_AuthStore.setFoodPreference');
+    try {
+      return super.setFoodPreference(foodPreference: foodPreference);
+    } finally {
+      _$_AuthStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
-userId: ${userId}
+userId: ${userId},
+foodPreference: ${foodPreference}
     ''';
   }
 }

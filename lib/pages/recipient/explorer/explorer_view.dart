@@ -5,12 +5,15 @@ import 'package:food_forward/models/Cart.dart';
 import 'package:food_forward/pages/Components/appbar.dart';
 import 'package:food_forward/pages/Components/sideNav.dart';
 import 'package:food_forward/pages/recipient/explorer/explorer_card.dart';
+import 'package:food_forward/services/auth_state.dart';
 import 'package:food_forward/services/donor/donor_services.dart';
 
 class ExplorerView extends HookWidget {
   const ExplorerView({
     Key? key, 
+    required this.authStore,
   }) : super(key: key);
+  final AuthStore authStore;
 
 
   @override
@@ -41,7 +44,9 @@ class ExplorerView extends HookWidget {
                 ),
               Expanded(
                 child: StreamBuilder<QuerySnapshot>(
-                  stream: DonorFunction().getAllFood(),
+                  stream: authStore.foodPreference != 'all'
+                    ? DonorFunction().getAllFoodByFoodPreference(userId: authStore.userId!, preference: authStore.foodPreference!)
+                    : DonorFunction().getAllFood(),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
                       return Text('Error ${snapshot.error}');
@@ -69,6 +74,7 @@ class ExplorerView extends HookWidget {
           context: context,
           data: snapshot[index],
           cart: cart,
+          authStore: authStore,
         );
       },
     );

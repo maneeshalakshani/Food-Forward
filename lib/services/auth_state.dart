@@ -11,8 +11,16 @@ abstract class _AuthStore with Store {
   @observable
   String? userId;
 
+  @observable
+  String? foodPreference;
+
   @action
   void setUserId({String? userId}) {
     this.userId = userId;
+  }
+
+  @action
+  void setFoodPreference({required String foodPreference}) {
+    this.foodPreference = foodPreference;
   }
 }

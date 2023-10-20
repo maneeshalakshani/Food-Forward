@@ -5,14 +5,16 @@ import 'package:food_forward/pages/Components/appbar.dart';
 import 'package:food_forward/pages/Components/sideNav.dart';
 import 'package:food_forward/pages/Components/squareButton.dart';
 import 'package:food_forward/routes/routes.gr.dart';
+import 'package:food_forward/services/auth_state.dart';
 import 'package:food_forward/services/authentication.dart';
 import 'package:food_forward/services/recipient/recipientSerices.dart';
 import 'CartCard.dart';
 
 class CartView extends StatefulWidget {
   final Cart cart;
+  final AuthStore authStore;
 
-  CartView({required this.cart});
+  CartView({required this.cart, required this.authStore,});
 
   @override
   _CartViewState createState() => _CartViewState();
@@ -68,7 +70,7 @@ class _CartViewState extends State<CartView> {
                   userId: Authentications().getCurrentUserId(), 
                   cartItems: widget.cart.items, 
                   context: context, 
-                  route: OrderConfirmRoute(orderNo: "afc7687JJe3"),
+                  route: OrderConfirmRoute(orderNo: "afc7687JJe3", authStore: widget.authStore),
                 );
               }, 
               text: "Place Order"
