@@ -5,6 +5,7 @@ import 'package:food_forward/pages/Components/authenticateNavigator.dart';
 import 'package:food_forward/pages/Components/squareButton.dart';
 import 'package:food_forward/pages/Components/textField.dart';
 import 'package:food_forward/routes/routes.gr.dart';
+import 'package:food_forward/services/auth_state.dart';
 import 'package:food_forward/services/authentication.dart';
 
 class VolunteerLoginView extends HookWidget {
@@ -25,6 +26,7 @@ class VolunteerLoginView extends HookWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    AuthStore store = AuthStore();
 
     return Scaffold(
       appBar: appBar(),
@@ -83,6 +85,7 @@ class VolunteerLoginView extends HookWidget {
                           email: emailController.text, 
                           password: passwordController.text, 
                           userType: userType, 
+                          store: store,
                           context: context, 
                           route: const VolunteerProfileRoute()
                         )
@@ -90,13 +93,15 @@ class VolunteerLoginView extends HookWidget {
                         ? Authentications().loginWithEmailAndPassword(
                             email: emailController.text, 
                             password: passwordController.text, 
+                            store: store,
                             userType: userType, 
                             context: context, 
-                            route: showAnalytics == true ? const ProfileRoute() : const DonorFoodListRoute()
+                            route: showAnalytics == true ? const ProfileRoute() : DonorFoodListRoute(authStore: store)
                           )
                         : Authentications().loginWithEmailAndPassword(
                             email: emailController.text, 
                             password: passwordController.text, 
+                            store: store,
                             userType: userType, 
                             context: context, 
                             route: const ExplorerRoute()

@@ -13,6 +13,14 @@ class DonorFunction {
         .snapshots();
   }
 
+  getAllFoodByUserId({required String userId}) {
+    return FirebaseFirestore.instance
+        .collection(fireStoreCollectionName)
+        .where('userId', isEqualTo: userId)
+        .orderBy('expiryDate')
+        .snapshots();
+  }
+
   createFoodItem(
       {required String name,
       required String price,
