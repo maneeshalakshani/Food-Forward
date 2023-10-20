@@ -1,4 +1,3 @@
-import 'package:food_forward/const.dart';
 import 'package:food_forward/routes/routes.gr.dart';
 
 class ScrollItem{
@@ -10,7 +9,7 @@ class ScrollItem{
 }
 
 List<ScrollItem> horizontalScrollList = [
-  ScrollItem(imageURL: LOGO_URL, name: "Stats", route: const MyStatsRoute()),
-  ScrollItem(imageURL: "assets/red.png", name: "Badges", route: null),
-  ScrollItem(imageURL: LOGO_URL, name: "Tips", route: const TipsRoute()),
+  ScrollItem(imageURL: 'assets/bar.png', name: "Stats", route: const MyStatsRoute()),
+  ScrollItem(imageURL: "assets/tickMark.png", name: "Badges", route: null),
+  ScrollItem(imageURL: 'assets/tips.png', name: "Tips", route: const TipsRoute()),
 ];
