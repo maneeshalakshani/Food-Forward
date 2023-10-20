@@ -76,6 +76,7 @@ class VolunteerLoginView extends HookWidget {
                   label: "Password",
                   prefixIcon: Icons.password,
                   controller: passwordController,
+                  obscureText: true,
                 ),
                 SquareButton(
                   text: "login".toUpperCase(),

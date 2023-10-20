@@ -10,6 +10,7 @@ class CustomeTextField extends HookWidget {
     this.showTopLabel = false,
     this.textColor = Colors.black,
     required this.controller,
+    this.obscureText = false,
   }) : super(key: key);
   final String label;
   final IconData? prefixIcon;
@@ -17,6 +18,7 @@ class CustomeTextField extends HookWidget {
   final bool? showTopLabel;
   final TextEditingController controller;
   final Color? textColor;
+  final bool obscureText;
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +43,7 @@ class CustomeTextField extends HookWidget {
             : const SizedBox(),
           TextFormField(
             controller: controller,
+            obscureText: obscureText,
             decoration: InputDecoration(
               hintText: 'Enter $label',
               labelStyle: TextStyle(
