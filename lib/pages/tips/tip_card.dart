@@ -28,6 +28,7 @@ class TipCard extends StatefulWidget {
 class _TipCardState extends State<TipCard> {
   late int _noOfReads;
   late double redShow;
+  late int yellows;
   late double yellowShow;
 
   @override
@@ -38,7 +39,6 @@ class _TipCardState extends State<TipCard> {
 
   int _calculateNoOfReads() {
     int reads = 0;
-    int yellows = 0;
     double oneSection = 0;
     for (int i = 0; i < widget.tipStore.tipsList[widget.tipID].stepReadDetector.length; i++) {
       if (widget.tipStore.tipsList[widget.tipID].stepReadDetector[i] == true) {
@@ -105,10 +105,10 @@ class _TipCardState extends State<TipCard> {
                           Container(
                             width: redShow,
                             height: 20,
-                            decoration: const BoxDecoration(
+                            decoration: BoxDecoration(
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(10.0),
-                                bottomLeft: Radius.circular(10.0)
+                                bottomLeft: Radius.circular(10.0),
                               ),
                               color: Color.fromARGB(255, 206, 11, 11),
                             ),
