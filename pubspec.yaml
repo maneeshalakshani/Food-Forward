@@ -43,6 +43,7 @@ dependencies:
   firebase_auth: ^4.11.1
   image_picker: ^1.0.4
   firebase_storage: ^11.3.1
+  payhere_mobilesdk_flutter: ^3.0.4
 
 
   # The following adds the Cupertino Icons font to your application.
