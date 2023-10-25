@@ -1,20 +1,26 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:food_forward/const.dart';
 import 'package:food_forward/pages/Components/appbar.dart';
 import 'package:food_forward/pages/Components/clickable_container.dart';
 import 'package:food_forward/pages/Components/sideNav.dart';
+import 'package:food_forward/pages/Components/squareButton.dart';
 import 'package:food_forward/pages/tips/expanded_tip/tip_detailed_card.dart';
+import 'package:food_forward/pages/tips/tip_state.dart';
 import 'package:food_forward/pages/tips/tips_list.dart';
+import 'package:food_forward/routes/routes.gr.dart';
 
 class ExpandedTipView extends HookWidget {
   const ExpandedTipView({
     Key? key, 
     required this.tipID,
     required this.tipItem,
+    required this.tipStore,
   }) : super(key: key);
   final int tipID;
   final TipItem tipItem;
+  final TipStore tipStore;
 
 
   @override
@@ -31,16 +37,16 @@ class ExpandedTipView extends HookWidget {
           child: Column(
             children: [
               ClickableContainer(
-                text: tipsList[tipID].tipTitle,
+                text: tipStore.tipsList[tipID].tipTitle,
                 bgColor: DARK_PINK,
                 width: width,
                 textColor: BLACK,
               ),
               Container(
                 width: width,
-                padding: const EdgeInsets.symmetric(vertical: 30),
+                padding: const EdgeInsets.symmetric(vertical: 20),
                 child: Text(
-                  tipsList[tipID].text,
+                  tipStore.tipsList[tipID].text,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: Colors.red,
@@ -48,18 +54,24 @@ class ExpandedTipView extends HookWidget {
                   ),
                 ),
               ),
-              SizedBox(
-                height: height/10 * 7.1,
+              Container(
+                height: height/10 * 5.3,
                 child: ListView.separated(
                   itemCount: tipItem.steps.length,
                   itemBuilder: (context, i){
                     return TipDetailedCard(
-                      tipNumber: i, 
+                      stepNumber: i, 
                       text: tipItem.steps[i],
+                      tipStore: tipStore,
+                      tipId: tipID,
                     );
                   }, 
                   separatorBuilder: (context, i) => const SizedBox(height: 20,)),
-              )
+              ),
+              SquareButton(
+                onPressed: () => context.router.push(TipsRoute(tipStore: tipStore)), 
+                text: "Back to Tips"
+              ),
             ],
           ),
         ),

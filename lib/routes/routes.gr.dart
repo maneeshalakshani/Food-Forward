@@ -14,9 +14,9 @@
 import 'package:auto_route/auto_route.dart' as _i23;
 import 'package:flutter/material.dart' as _i24;
 
-import '../models/Cart.dart' as _i28;
-import '../models/CartItem.dart' as _i30;
-import '../models/Food.dart' as _i29;
+import '../models/Cart.dart' as _i29;
+import '../models/CartItem.dart' as _i31;
+import '../models/Food.dart' as _i30;
 import '../pages/authentication/login/volunteer_login_view.dart' as _i8;
 import '../pages/authentication/signup/volunteer_signup_view.dart' as _i9;
 import '../pages/donor/add_food/add_food_view.dart' as _i18;
@@ -33,10 +33,11 @@ import '../pages/recipient/cart/payment_and_address/payment_and_address_view.dar
 import '../pages/recipient/explorer/explorer_view.dart' as _i14;
 import '../pages/recipient/my_orders/my_orders_view.dart' as _i20;
 import '../pages/stats/my_stats_view.dart' as _i4;
-import '../pages/stats/specified_stat_view/pieChartData.dart' as _i26;
+import '../pages/stats/specified_stat_view/pieChartData.dart' as _i27;
 import '../pages/stats/specified_stat_view/specified_stat_view.dart' as _i7;
 import '../pages/tips/expanded_tip/expanded_tip_view.dart' as _i6;
-import '../pages/tips/tips_list.dart' as _i25;
+import '../pages/tips/tip_state.dart' as _i25;
+import '../pages/tips/tips_list.dart' as _i26;
 import '../pages/tips/tips_view.dart' as _i5;
 import '../pages/volunteer/my_profile/my_profile.dart' as _i10;
 import '../pages/volunteer/my_tasks/complete_task/complete_task_view.dart'
@@ -44,7 +45,7 @@ import '../pages/volunteer/my_tasks/complete_task/complete_task_view.dart'
 import '../pages/volunteer/my_tasks/my_tasks_view.dart' as _i12;
 import '../pages/volunteer/notifications/my_notifications_view.dart' as _i11;
 import '../pages/volunteer/rewards/rewards_view.dart' as _i21;
-import '../services/auth_state.dart' as _i27;
+import '../services/auth_state.dart' as _i28;
 
 class AppRouter extends _i23.RootStackRouter {
   AppRouter([_i24.GlobalKey<_i24.NavigatorState>? navigatorKey])
@@ -82,9 +83,13 @@ class AppRouter extends _i23.RootStackRouter {
       );
     },
     TipsRoute.name: (routeData) {
+      final args = routeData.argsAs<TipsRouteArgs>();
       return _i23.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i5.TipsView(),
+        child: _i5.TipsView(
+          key: args.key,
+          tipStore: args.tipStore,
+        ),
       );
     },
     ExpandedTipRoute.name: (routeData) {
@@ -95,6 +100,7 @@ class AppRouter extends _i23.RootStackRouter {
           key: args.key,
           tipID: args.tipID,
           tipItem: args.tipItem,
+          tipStore: args.tipStore,
         ),
       );
     },
@@ -417,14 +423,36 @@ class MyStatsRoute extends _i23.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.TipsView]
-class TipsRoute extends _i23.PageRouteInfo<void> {
-  const TipsRoute()
-      : super(
+class TipsRoute extends _i23.PageRouteInfo<TipsRouteArgs> {
+  TipsRoute({
+    _i24.Key? key,
+    required _i25.TipStore tipStore,
+  }) : super(
           TipsRoute.name,
           path: '/tips',
+          args: TipsRouteArgs(
+            key: key,
+            tipStore: tipStore,
+          ),
         );
 
   static const String name = 'TipsRoute';
+}
+
+class TipsRouteArgs {
+  const TipsRouteArgs({
+    this.key,
+    required this.tipStore,
+  });
+
+  final _i24.Key? key;
+
+  final _i25.TipStore tipStore;
+
+  @override
+  String toString() {
+    return 'TipsRouteArgs{key: $key, tipStore: $tipStore}';
+  }
 }
 
 /// generated route for
@@ -433,7 +461,8 @@ class ExpandedTipRoute extends _i23.PageRouteInfo<ExpandedTipRouteArgs> {
   ExpandedTipRoute({
     _i24.Key? key,
     required int tipID,
-    required _i25.TipItem tipItem,
+    required _i26.TipItem tipItem,
+    required _i25.TipStore tipStore,
   }) : super(
           ExpandedTipRoute.name,
           path: '/expandedTips',
@@ -441,6 +470,7 @@ class ExpandedTipRoute extends _i23.PageRouteInfo<ExpandedTipRouteArgs> {
             key: key,
             tipID: tipID,
             tipItem: tipItem,
+            tipStore: tipStore,
           ),
         );
 
@@ -452,17 +482,20 @@ class ExpandedTipRouteArgs {
     this.key,
     required this.tipID,
     required this.tipItem,
+    required this.tipStore,
   });
 
   final _i24.Key? key;
 
   final int tipID;
 
-  final _i25.TipItem tipItem;
+  final _i26.TipItem tipItem;
+
+  final _i25.TipStore tipStore;
 
   @override
   String toString() {
-    return 'ExpandedTipRouteArgs{key: $key, tipID: $tipID, tipItem: $tipItem}';
+    return 'ExpandedTipRouteArgs{key: $key, tipID: $tipID, tipItem: $tipItem, tipStore: $tipStore}';
   }
 }
 
@@ -472,7 +505,7 @@ class SpecifiedStatRoute extends _i23.PageRouteInfo<SpecifiedStatRouteArgs> {
   SpecifiedStatRoute({
     _i24.Key? key,
     required String title,
-    required List<_i26.PieChartListData> dataList,
+    required List<_i27.PieChartListData> dataList,
     required String heroWord,
     required String text,
     _i24.Color? heroWordColor,
@@ -509,7 +542,7 @@ class SpecifiedStatRouteArgs {
 
   final String title;
 
-  final List<_i26.PieChartListData> dataList;
+  final List<_i27.PieChartListData> dataList;
 
   final String heroWord;
 
@@ -662,7 +695,7 @@ class VolunteerCompleteTaskRoute extends _i23.PageRouteInfo<void> {
 class ExplorerRoute extends _i23.PageRouteInfo<ExplorerRouteArgs> {
   ExplorerRoute({
     _i24.Key? key,
-    required _i27.AuthStore authStore,
+    required _i28.AuthStore authStore,
   }) : super(
           ExplorerRoute.name,
           path: '/explorer-view',
@@ -683,7 +716,7 @@ class ExplorerRouteArgs {
 
   final _i24.Key? key;
 
-  final _i27.AuthStore authStore;
+  final _i28.AuthStore authStore;
 
   @override
   String toString() {
@@ -695,8 +728,8 @@ class ExplorerRouteArgs {
 /// [_i15.CartView]
 class CartRoute extends _i23.PageRouteInfo<CartRouteArgs> {
   CartRoute({
-    required _i28.Cart cart,
-    required _i27.AuthStore authStore,
+    required _i29.Cart cart,
+    required _i28.AuthStore authStore,
   }) : super(
           CartRoute.name,
           path: '/cart-view',
@@ -715,9 +748,9 @@ class CartRouteArgs {
     required this.authStore,
   });
 
-  final _i28.Cart cart;
+  final _i29.Cart cart;
 
-  final _i27.AuthStore authStore;
+  final _i28.AuthStore authStore;
 
   @override
   String toString() {
@@ -731,7 +764,7 @@ class OrderConfirmRoute extends _i23.PageRouteInfo<OrderConfirmRouteArgs> {
   OrderConfirmRoute({
     _i24.Key? key,
     required String orderNo,
-    required _i27.AuthStore authStore,
+    required _i28.AuthStore authStore,
   }) : super(
           OrderConfirmRoute.name,
           path: '/order-confirm-view',
@@ -756,7 +789,7 @@ class OrderConfirmRouteArgs {
 
   final String orderNo;
 
-  final _i27.AuthStore authStore;
+  final _i28.AuthStore authStore;
 
   @override
   String toString() {
@@ -769,7 +802,7 @@ class OrderConfirmRouteArgs {
 class DonorFoodListRoute extends _i23.PageRouteInfo<DonorFoodListRouteArgs> {
   DonorFoodListRoute({
     _i24.Key? key,
-    required _i27.AuthStore authStore,
+    required _i28.AuthStore authStore,
   }) : super(
           DonorFoodListRoute.name,
           path: '/donor-food-list-view',
@@ -790,7 +823,7 @@ class DonorFoodListRouteArgs {
 
   final _i24.Key? key;
 
-  final _i27.AuthStore authStore;
+  final _i28.AuthStore authStore;
 
   @override
   String toString() {
@@ -803,7 +836,7 @@ class DonorFoodListRouteArgs {
 class DonorAddFoodRoute extends _i23.PageRouteInfo<DonorAddFoodRouteArgs> {
   DonorAddFoodRoute({
     _i24.Key? key,
-    required _i27.AuthStore authStore,
+    required _i28.AuthStore authStore,
   }) : super(
           DonorAddFoodRoute.name,
           path: '/donor-add-food-view',
@@ -824,7 +857,7 @@ class DonorAddFoodRouteArgs {
 
   final _i24.Key? key;
 
-  final _i27.AuthStore authStore;
+  final _i28.AuthStore authStore;
 
   @override
   String toString() {
@@ -838,8 +871,8 @@ class DonorUpdateFoodRoute
     extends _i23.PageRouteInfo<DonorUpdateFoodRouteArgs> {
   DonorUpdateFoodRoute({
     _i24.Key? key,
-    required _i29.Food food,
-    required _i27.AuthStore authStore,
+    required _i30.Food food,
+    required _i28.AuthStore authStore,
   }) : super(
           DonorUpdateFoodRoute.name,
           path: '/donor-update-food-view',
@@ -862,9 +895,9 @@ class DonorUpdateFoodRouteArgs {
 
   final _i24.Key? key;
 
-  final _i29.Food food;
+  final _i30.Food food;
 
-  final _i27.AuthStore authStore;
+  final _i28.AuthStore authStore;
 
   @override
   String toString() {
@@ -901,8 +934,8 @@ class VolunteerRewardRoute extends _i23.PageRouteInfo<void> {
 class PaymentAddressRoute extends _i23.PageRouteInfo<PaymentAddressRouteArgs> {
   PaymentAddressRoute({
     _i24.Key? key,
-    required _i27.AuthStore authStore,
-    required List<_i30.CartItem> cartItems,
+    required _i28.AuthStore authStore,
+    required List<_i31.CartItem> cartItems,
   }) : super(
           PaymentAddressRoute.name,
           path: '/payment-address-view',
@@ -925,9 +958,9 @@ class PaymentAddressRouteArgs {
 
   final _i24.Key? key;
 
-  final _i27.AuthStore authStore;
+  final _i28.AuthStore authStore;
 
-  final List<_i30.CartItem> cartItems;
+  final List<_i31.CartItem> cartItems;
 
   @override
   String toString() {
