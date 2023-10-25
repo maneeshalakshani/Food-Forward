@@ -116,12 +116,14 @@ class _TipCardState extends State<TipCard> {
                           Container(
                             width: yellowShow,
                             height: 20,
-                            decoration: const BoxDecoration(
+                            decoration: BoxDecoration(
                               borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(10.0),
-                                bottomRight: Radius.circular(10.0)
+                                topRight: const Radius.circular(10.0),
+                                bottomRight: const Radius.circular(10.0),
+                                topLeft: _noOfReads == 0 ? const Radius.circular(10.0) : const Radius.circular(0.0),
+                                bottomLeft: _noOfReads == 0 ? const Radius.circular(10.0) : const Radius.circular(0.0)
                               ),
-                              color: Color.fromARGB(255, 80, 189, 252),
+                              color: const Color.fromARGB(255, 80, 189, 252),
                             ),
                           ),
                         ],
