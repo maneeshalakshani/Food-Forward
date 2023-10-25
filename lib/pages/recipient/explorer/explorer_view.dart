@@ -27,7 +27,7 @@ class ExplorerView extends HookWidget {
       body: SingleChildScrollView(
         child: Container(
           width: width,
-          height: height/10*9,
+          height: height/10*8.4,
           margin: EdgeInsets.only(top: 30),
           child: Column(
             children: [

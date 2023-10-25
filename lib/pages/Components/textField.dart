@@ -11,6 +11,7 @@ class CustomeTextField extends HookWidget {
     this.textColor = Colors.black,
     required this.controller,
     this.obscureText = false,
+    this.errorText,
   }) : super(key: key);
   final String label;
   final IconData? prefixIcon;
@@ -19,6 +20,7 @@ class CustomeTextField extends HookWidget {
   final TextEditingController controller;
   final Color? textColor;
   final bool obscureText;
+  final String? errorText;
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +46,15 @@ class CustomeTextField extends HookWidget {
           TextFormField(
             controller: controller,
             obscureText: obscureText,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return errorText ?? "Cannot be null";
+              } 
+              // else if (value.contains('@')) {
+              //   return 'Please don\'t use the @ char.';
+              // }
+              return null;
+            },
             decoration: InputDecoration(
               hintText: 'Enter $label',
               labelStyle: TextStyle(

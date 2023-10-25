@@ -6,8 +6,6 @@ import 'package:food_forward/pages/Components/sideNav.dart';
 import 'package:food_forward/pages/Components/squareButton.dart';
 import 'package:food_forward/routes/routes.gr.dart';
 import 'package:food_forward/services/auth_state.dart';
-import 'package:food_forward/services/authentication.dart';
-import 'package:food_forward/services/recipient/recipientSerices.dart';
 import 'CartCard.dart';
 
 class CartView extends StatefulWidget {
@@ -66,12 +64,14 @@ class _CartViewState extends State<CartView> {
             ),
             SquareButton(
               onPressed: (){
-                RecipientFunction().createOrder(
-                  userId: Authentications().getCurrentUserId(), 
-                  cartItems: widget.cart.items, 
-                  context: context, 
-                  route: OrderConfirmRoute(orderNo: "afc7687JJe3", authStore: widget.authStore),
-                );
+                // RecipientFunction().createOrder(
+                //   userId: Authentications().getCurrentUserId(), 
+                //   cartItems: widget.cart.items, 
+                //   context: context, 
+                //   route: OrderConfirmRoute(orderNo: "afc7687JJe3", authStore: widget.authStore),
+                // );
+
+                context.router.push(PaymentAddressRoute(cartItems:  widget.cart.items, authStore: widget.authStore));
               }, 
               text: "Place Order"
             ),
