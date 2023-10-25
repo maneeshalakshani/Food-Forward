@@ -16,18 +16,23 @@ class ImagePickerWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    // double width = MediaQuery.of(context).size.width;
+    double width = MediaQuery.of(context).size.width;
 
-    return Column(
-      children: [
-        ElevatedButton(
-          onPressed: () => _pickImage(ImageSource.gallery),
-          child: const Text("Upload Image")
-        ),
-        Observer(builder: (BuildContext context){
-          return Text(store.uploadedImageLink ?? 'Image', style: TextStyle(color: Colors.white),);
-        }),
-      ],
+    return Container(
+      width: width,
+      margin: const EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ElevatedButton(
+            onPressed: () => _pickImage(ImageSource.gallery),
+            child: const Text("Upload Image")
+          ),
+          Observer(builder: (BuildContext context){
+            return Text(store.uploadedImageLink ?? 'Image Not Selected', style: TextStyle(color: Colors.white),);
+          }),
+        ],
+      ),
     );
   }
 

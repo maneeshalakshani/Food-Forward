@@ -41,6 +41,22 @@ mixin _$FoodStore on _FoodStore, Store {
     });
   }
 
+  late final _$initialDateAtom =
+      Atom(name: '_FoodStore.initialDate', context: context);
+
+  @override
+  DateTime get initialDate {
+    _$initialDateAtom.reportRead();
+    return super.initialDate;
+  }
+
+  @override
+  set initialDate(DateTime value) {
+    _$initialDateAtom.reportWrite(value, super.initialDate, () {
+      super.initialDate = value;
+    });
+  }
+
   late final _$_FoodStoreActionController =
       ActionController(name: '_FoodStore', context: context);
 
@@ -70,7 +86,8 @@ mixin _$FoodStore on _FoodStore, Store {
   String toString() {
     return '''
 uploadedImageLink: ${uploadedImageLink},
-selectedDate: ${selectedDate}
+selectedDate: ${selectedDate},
+initialDate: ${initialDate}
     ''';
   }
 }

@@ -30,6 +30,7 @@ class _DonorUpdateFoodViewState extends State<DonorUpdateFoodView> {
   final TextEditingController envImpactController = TextEditingController();
   var selectedPreference; 
   FoodStore store = FoodStore();
+  DateTime selectedDate = DateTime.now();
 
   @override
   void initState() {
@@ -56,6 +57,7 @@ class _DonorUpdateFoodViewState extends State<DonorUpdateFoodView> {
       envImpactController: envImpactController,
       store: store,
       authStore: widget.authStore,
+      selectedDate: selectedDate,
     );
   }
 }
@@ -73,6 +75,7 @@ class DonorUpdateFood extends HookWidget {
     required this.envImpactController,
     required this.authStore,
     required this.store,
+    required this.selectedDate,
   }) : super(key: key);
   final Food food;
   final TextEditingController foodNameController;
@@ -83,6 +86,7 @@ class DonorUpdateFood extends HookWidget {
   var selectedPreference; 
   FoodStore store;
   final AuthStore authStore;
+  DateTime selectedDate;
 
   @override
   Widget build(BuildContext context) {
@@ -94,6 +98,11 @@ class DonorUpdateFood extends HookWidget {
       body: SingleChildScrollView(
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          padding: const EdgeInsets.only(top: 20),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20.0),
+            color: Colors.black,
+          ),
           width: width,
           child: Column(
             children: [
@@ -104,7 +113,7 @@ class DonorUpdateFood extends HookWidget {
                   style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -112,33 +121,37 @@ class DonorUpdateFood extends HookWidget {
                 label: "Food Name",
                 showTopLabel: true,
                 controller: foodNameController,
+                textColor: Colors.white,
               ),
               CustomeTextField(
                 label: "Price",
                 showTopLabel: true,
                 controller: priceController,
+                textColor: Colors.white,
               ),
               CustomeTextField(
                 label: "Available Quantity",
                 showTopLabel: true,
                 controller: quantityController,
+                textColor: Colors.white,
               ),
               // CustomeTextField(
               //   label: "Expiry Date",
               //   showTopLabel: true,
               //   controller: expiryController,
               // ),
-              DatePickerWidget(store: store),
               CustomeTextField(
                 label: "Environmental Impact",
                 showTopLabel: true,
                 controller: envImpactController,
+                textColor: Colors.white,
               ),
               FoodPreferenceSelection(
                 onChanged: (value) {
                   selectedPreference = value;
                 },
               ),
+              DatePickerWidget(store: store, selectedDate: selectedDate,),
               SquareButton(
                 onPressed: () {
                   print("Selected Food Preference: $selectedPreference");

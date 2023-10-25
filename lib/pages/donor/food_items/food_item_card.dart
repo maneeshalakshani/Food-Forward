@@ -29,19 +29,16 @@ class FoodItemCard extends HookWidget {
         children: [
           Row(
             children: [
-              Container(
+              SizedBox(
                 width: width/5* 1.5,
-                // child: Image.memory(
-                //   base64Decode(
-                //     food.imageUrl
-                //   )
-                // ),
                 child: Image.network(
                   food.imageUrl,
+                  height: 100,
                 ),
               ),
               Container(
-                width: width/5* 2.3,
+                width: width/5* 2.1,
+                margin: const EdgeInsets.only(left: 20),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,6 +48,7 @@ class FoodItemCard extends HookWidget {
                       style: const TextStyle(
                         color: Colors.red,
                         fontWeight: FontWeight.bold,
+                        fontSize: 18,
                       ),
                     ),
                     Text(
@@ -58,13 +56,15 @@ class FoodItemCard extends HookWidget {
                       style: const TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
+                        fontSize: 16,
                       ),
                     ),
                     Text(
                       "Expiry Date: ${food.expiryDate.toString().split(" ")[0]}",
                       style: const TextStyle(
                         color: Colors.black,
-                        fontWeight: FontWeight.bold,
+                        // fontWeight: FontWeight.bold,
+                        fontSize: 16,
                       ),
                     ),
                   ],

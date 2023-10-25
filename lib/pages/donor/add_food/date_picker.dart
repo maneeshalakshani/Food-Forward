@@ -1,40 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:food_forward/pages/donor/add_food/food_state.dart';
 
 // ignore: must_be_immutable
-class DatePickerWidget extends HookWidget {
+class DatePickerWidget extends StatefulWidget {
+  final FoodStore store;
+  DateTime selectedDate;
+
   DatePickerWidget({
     Key? key,
     required this.store,
+    required this.selectedDate,
   }) : super(key: key);
-  FoodStore store;
 
+  @override
+  _DatePickerWidgetState createState() => _DatePickerWidgetState();
+}
+
+class _DatePickerWidgetState extends State<DatePickerWidget> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
 
     return Container(
-      width: width/10 * 7.5,
+      width: width / 10 * 7.5,
       margin: const EdgeInsets.only(top: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Observer(
-            builder: (BuildContext context){
+            builder: (BuildContext context) {
               return Text(
-                "${store.selectedDate.toLocal()}".split(' ')[0], // Display selected date
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+                "${widget.store.selectedDate.toLocal()}".split(' ')[0], // Display selected date
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
               );
             },
           ),
-          // const SizedBox(
-          //   height: 20.0,
+          // Text(
+          //   "${widget.selectedDate}".split(' ')[0], // Display selected date
+          //   style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
           // ),
           ElevatedButton(
             onPressed: () => _selectDate(context), // Open date picker
-            child: Text('Select Expire Date date'),
+            child: const Text('Select Expire Date date'),
           ),
         ],
       ),
@@ -44,14 +52,16 @@ class DatePickerWidget extends HookWidget {
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: store.selectedDate,
+      initialDate: widget.store.initialDate,
       firstDate: DateTime(2000),
       lastDate: DateTime(2101),
     );
-    if (picked != null && picked != store.selectedDate) {
+    if (picked != null && picked != widget.store.selectedDate) {
       // Update the selected date
-      store.setSelectedDate(selectedDate: picked);
+      widget.store.setSelectedDate(selectedDate: picked);
+      setState(() {
+        widget.selectedDate = picked;
+      });
     }
   }
-
 }

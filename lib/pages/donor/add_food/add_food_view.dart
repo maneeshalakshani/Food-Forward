@@ -13,6 +13,7 @@ import 'package:food_forward/services/auth_state.dart';
 import 'package:food_forward/services/authentication.dart';
 import 'package:food_forward/services/donor/donor_services.dart';
 
+// ignore: must_be_immutable
 class DonorAddFoodView extends HookWidget {
   DonorAddFoodView({
     Key? key,
@@ -25,6 +26,7 @@ class DonorAddFoodView extends HookWidget {
   final TextEditingController quantityController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final TextEditingController envImpactController = TextEditingController();
+  DateTime selectedDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +82,6 @@ class DonorAddFoodView extends HookWidget {
               //   showTopLabel: true,
               //   controller: expiryController,
               // ),
-              DatePickerWidget(store: store),
               CustomeTextField(
                 label: "Environmental Impact",
                 showTopLabel: true,
@@ -93,6 +94,7 @@ class DonorAddFoodView extends HookWidget {
                 },
               ),
               ImagePickerWidget(store: store,),
+              DatePickerWidget(store: store, selectedDate: selectedDate,),
               SquareButton(
                 onPressed: () async {
                   print("Selected Food Preference: $selectedPreference");
